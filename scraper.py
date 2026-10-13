@@ -337,7 +337,8 @@ def poll_once(out: Path, fixture: Path | None = None) -> int:
         if inc and is_publishable(inc):
             fresh.append(enrich(inc, cache))
     GEOCACHE.write_text(json.dumps(cache, indent=1))
-    merged = merge(read_feed(out), fresh, datetime.now())
+    existing = [i for i in read_feed(out) if not str(i.get("id", "")).startswith("SIM-")]  # drop demo data
+    merged = merge(existing, fresh, datetime.now())
     write_feed(out, merged, simulated=False)
     print(f"{datetime.now():%H:%M:%S} parsed={len(rows)} published={len(fresh)} feed={len(merged)}")
     return len(fresh)
