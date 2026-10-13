@@ -21,3 +21,14 @@ docs/      plan, policies, legal records
 ```
 
 Videos describe dispatched and reported incidents only. They are not official statements from any agency.
+
+## Development
+
+Requires Node 20+.
+
+```
+npm install
+npm run check    # typecheck + lint + tests (same as CI)
+```
+
+Copy `.env.example` to `.env` for local secrets. Policies: [docs/CONTENT_POLICY.md](docs/CONTENT_POLICY.md) · Data source: [docs/DATA_SOURCE.md](docs/DATA_SOURCE.md)

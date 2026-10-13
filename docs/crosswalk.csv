@@ -1,9 +1,9 @@
 ID,Deliverable,Day,Date,Hours,Owner,Skill fit,Depends on,Monetization lever,Location,Acceptance criteria,Status
 D1,Brand + accounts,1,Tue Oct 13,1,You,—,—,Accounts are prerequisite for all payouts,"TikTok, YouTube, domain","Personal accounts with bios, links and profile art",Not started
-D4,911 district outreach,1,Tue Oct 13,0.5,You,—,—,"Protects data access, and so the business",docs/legal/911_outreach.md,Sent; reply logged,Not started
-D5,Data source spec + fixtures,1,Tue Oct 13,1.5,You + Claude,HL7 field mapping (strong),—,Pipeline,"docs/DATA_SOURCE.md, ingest/fixtures/",Fields and status codes documented; 3 fixtures,Not started
-D2,Repo scaffold + CI + run-book,1,Tue Oct 13,1,Claude,Node (strong),—,Pipeline,"/, .github/",CI green; README explains deploy and daily routine,Not started
-D3,Content & safety policy,1,Tue Oct 13,1,Claude → You,PHI privacy (strong),—,Brand safety → sponsors; platform standing,docs/CONTENT_POLICY.md,"Exclusions, language rules and takedown SLA",Not started
+D4,911 district outreach,1,Tue Oct 13,0.5,You,—,—,"Protects data access, and so the business",docs/legal/911_outreach.md,Sent; reply logged,Drafted — owner to send
+D5,Data source spec + fixtures,1,Tue Oct 13,1.5,You + Claude,HL7 field mapping (strong),—,Pipeline,"docs/DATA_SOURCE.md, ingest/fixtures/",Fields and status codes documented; 3 fixtures,Spec drafted — owner to capture fixtures
+D2,Repo scaffold + CI + run-book,1,Tue Oct 13,1,Claude,Node (strong),—,Pipeline,"/, .github/",CI green; README explains deploy and daily routine,Done
+D3,Content & safety policy,1,Tue Oct 13,1,Claude → You,PHI privacy (strong),—,Brand safety → sponsors; platform standing,docs/CONTENT_POLICY.md,"Exclusions, language rules and takedown SLA",Drafted — owner to approve
 D6,CAD scraper,2,Wed Oct 14,4,You + Claude,Bots/polling (strong),D5,Pipeline,ingest/,All columns parsed; fixture tests pass,Not started
 D7,DB schema,2,Wed Oct 14,2,You,SQL (strong),D5,Sponsor stats; trend videos,db/migrations/,Applies on Render; upsert + status history work,Not started
 D10,Production poller,2,Wed Oct 14,2.5,You + Claude,Deploys (medium),"D6, D7",Data archive → future licensing,Render cron,Running every 4 minutes with alerts,Not started
