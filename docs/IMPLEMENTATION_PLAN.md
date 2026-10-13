@@ -1,272 +1,237 @@
-# Chattanooga Public Safety Feed — Implementation Plan
+# Chattanooga Public Safety Feed — 7-Day Full-Time Sprint
 
-**Goal:** a monetized short-form public-safety news channel for Chattanooga / Hamilton County on TikTok and YouTube Shorts. The channel is powered by an automated data pipeline and has a human host.
-**Start date:** Tue Oct 13, 2026 · **Plan horizon:** 6 months (to Apr 2027)
-**Status:** Week 1. The repo is empty, and this is the first commit.
+**Sprint:** Tue Oct 13 → Mon Oct 19, 2026 · full-time, about 9–10 hours a day, about 65 hours in total
+**Goal:** a revenue-ready short-form channel on TikTok and YouTube Shorts by the end of Day 7: a working data-to-video pipeline, daily posting, and every monetization channel set up and pitched.
+**Builders:** You (owner, host, seller) and Claude (pair-programmer, drafting, research)
+
+> **What "done in 1 week" means.** The **product, the channel and the sales machinery** can be fully done in 7 days. **Revenue itself cannot.** TikTok Creator Rewards needs 10k followers and 100k views in 30 days. YouTube needs 1,000 subscribers and 10M Shorts views in 90 days. Sponsors want to see a few weeks of posting. The sprint therefore ends with everything that produces money **switched on and pitched**: affiliate links live and 15+ sponsor pitches sent. The first sponsor close is realistic in weeks 2–4.
 
 ---
 
-## 1. Key decisions (read first)
+## 1. Skills review
 
-Research into current platform rules changed the original concept in four ways.
+The review is based on the 50 repos on your GitHub, judged by repo names and organization only. Correct anything I got wrong.
 
-| # | Original idea | Problem | Decision |
+| Area | Evidence in your repos | Rating | How the sprint uses it |
 |---|---|---|---|
-| 1 | Auto-generate one templated video per incident with no human involved | YouTube's **inauthentic content** policy, enforced since Jul 15, 2025, bars templated, mass-produced and minimal-value AI content from monetization. TikTok's Creator Rewards pays only for **original** videos. A fully automated card farm fails both rules, so it can grow but not earn. | **Automation drafts and a human publishes.** The pipeline finds incidents, drafts scripts and renders visuals. A host records voiceover and adds context, and approves every post. |
-| 2 | 15–30 second per-incident clips | TikTok Creator Rewards pays only on videos **longer than 1 minute**. | Two formats: short **incident clips** build reach, and a **60–90 second daily recap** earns Creator Rewards. |
-| 3 | Live scanner audio + AI transcription | Rebroadcasting scanner feeds such as Broadcastify for profit carries terms-of-service and federal radio-law risk. Transcription errors have caused false "active shooter" reports for competitors. | **Phase 1 uses public CAD data only** and no scanner audio. Audio is reconsidered in Phase 5 after a legal review. |
-| 4 | Poll the county site every 60 seconds | The Hamilton County 911 page limits sessions to 15 minutes, fills its table with JavaScript, and carries an "All Rights Reserved" notice. | Poll every **3–5 minutes** with a headless browser and an identifying User-Agent. **Ask the 911 district for permission or a data feed** in Week 1. |
+| **React / Vite frontends** | `yoh-underground-frontend*` (×6), `angelkfrontend*`, `euphoria_frontend`, `vite-react`, `gatsby-starter-portfolio-cara` | **Strong** | The **Remotion video templates are written in React**, so you design videos the way you build pages. The review queue app is plain Vite + React. |
+| **Node / Express + Firebase backends** | `YOHbackend`, `YOH-API-Express-Firebase-Admin-`, `angelkbackend`, `yoh-underground-server`, `southafricaback` | **Strong** | The **whole pipeline is Node/TypeScript**: scraper, drafter, render worker and API. That means one language, no Python, and no context switching. |
+| **SQL / data analysis** | `SQL_Work`, `DA_Builds`, Snowflake pipelines fork | **Strong** | Postgres schema, dedupe logic, and the "incidents by neighborhood" trend videos and sponsor stats |
+| **Bots, schedulers and polling APIs** | `solana-signal-bot`, `crypto-fvg-fib-bot`, `trading2026` | **Strong** | The scraper is a signal bot: it polls a source, detects new events and fires an action. Reuse that pattern. |
+| **Healthcare data / HL7 / EHR** | `HL7-INTERFACE-ANALYST-PORTFOLIO`, `HL7_DB_EHR` | **Strong (transferable)** | You already think in feeds, field mapping and privacy (PHI). Apply it to CAD fields and to excluding medical calls. |
+| **Deploying to cloud hosts** | Many frontend/backend pairs; Render and Vercel are connected to this account | **Medium** | Render cron + Postgres; Vercel for the review app |
+| **Video production / on-camera hosting** | None visible | **Gap** | Remotion covers the visuals. Your voiceover is the human element that keeps the channel monetizable. Day 1 includes 2 manual practice videos. |
+| **Audience growth / short-form strategy** | None visible | **Gap** | Use the format and hook templates (D11). Study 3 competitor channels on Day 1. |
+| **Local sales / sponsorship** | None visible | **Gap** | Day 6–7 scripts: media kit, rate card, pitch email and call script (D20–D21) |
+| **Finishing one version** | 6 versions of `yoh-underground-*`, 6 of `angel*`, 4 of `ForeverDocs` | **Risk** | **Sprint rule:** one repo, one `main` branch and a deploy every day. Fix forward and never start a "v2" repo this week. |
 
-**Main earner:** platform payouts are small at local scale. **Local sponsorships** are the realistic primary revenue, and they can be sold before platform thresholds are met (see §2).
+**Net:** the build is squarely within your skills. The real risks this week are the non-code work: hosting, posting consistently and selling. The schedule gives those real hours instead of leaving them for "after."
 
 ---
 
-## 2. Monetization model
+## 2. Scope for 7 days
 
-Revenue streams are listed in the order they become available.
+**In scope:** CAD scraper, Postgres, geocoding, exclusion filters, AI script drafts, Remotion templates for two formats, a review queue, daily posting, the content policy, the 911 outreach email, a media kit, a link page with affiliate links, a 40-prospect sponsor list, 15+ pitches, and API audit applications.
 
-| Stream | Unlock condition | Realistic timing | Notes |
+**Cut or deferred:**
+
+- Public web map: replaced by a simple link page
+- Automated metrics collection: replaced by a manual tracking sheet
+- API auto-posting: waits for platform audits, so posting stays manual for now
+- Scanner audio: needs a legal review first
+- Second county
+
+**Stack (matched to your skills):** Node 20 + TypeScript · Playwright (Node) · Postgres on Render (cron job for the poller) · Census Geocoder · Claude API for drafts · Remotion (React) · Vite + React review app on Vercel · MapLibre/OSM tiles with attribution.
+
+**Key rules carried over from research:**
+
+- A human voiceover and approval on every video. YouTube's inauthentic-content policy demonetizes templated AI output.
+- The Daily Recap runs **over 60 seconds**, because TikTok Creator Rewards pays only on videos over one minute.
+- Poll the county page every 3–5 minutes. It limits sessions to 15 minutes and carries an "All Rights Reserved" notice. Email the 911 district on Day 1.
+- No EMS or medical, domestic, or juvenile calls. Show block-level locations only, never names, and use "reported/dispatched" wording.
+
+---
+
+## 3. Day-by-day plan
+
+### Day 1 — Tue Oct 13 · Foundation (about 6 hours, afternoon)
+
+| Time | Task | Who | Deliverable |
 |---|---|---|---|
-| **Local sponsorship** ("Safety Recap presented by …") | About 3–5k engaged local followers and a media kit | Months 2–3 | Target security and alarm installers, locksmiths, personal-injury and defense attorneys, insurance agents, towing and auto-glass companies, and self-defense gyms. A planning assumption is **$150–500 per sponsor slot per month**; validate with the first 3 pitches. Disclose sponsorships with the platform's paid-partnership tools. |
-| **Affiliate** (home cameras, dashcams, safety gear) | Link in bio or link page | Month 1 onward | Low effort, low yield. Use only products the host would recommend. |
-| **TikTok Creator Rewards** | 18+, personal account, **10k followers, 100k views in the last 30 days**, videos over 1 minute, original content | Months 3–5 if growth holds | Creator-reported US RPM is about **$0.50–$2.00 per 1,000 qualified views**. At 1M qualified views a month, that is roughly $500–2,000 a month. |
-| **YouTube Partner Program** | **1,000 subscribers + 10M Shorts views in the last 90 days** (or 4,000 long-form watch hours in 12 months) | Months 4–6+ | Shorts ad revenue per view is low. Check in YouTube Studio whether the lower fan-funding tier is available. Shorts views do not count toward watch hours. |
-| **Web map + newsletter** (owned audience) | Phase 3 site live | Month 2 onward | This protects against platform bans. Monetize with display ads and newsletter sponsors. |
-| **Data and clip licensing** to local media | Clean archive of 90+ days | Month 6+ | Sell trend summaries, such as "incidents by neighborhood," to local outlets and real-estate or insurance researchers. |
+| 12:00–1:00 | Pick the brand name and handles. Create **personal** TikTok and YouTube accounts, a Gmail and a domain. | You | D1 |
+| 1:00–1:30 | Send the email to the Hamilton County 911 district: describe the project and ask about reuse and data-feed access. | You (Claude drafts) | D4 |
+| 1:30–3:00 | Inspect the network calls on the CAD page. Document the fields and status codes and save 3 HTML/JSON fixtures. | You + Claude | D5 |
+| 3:00–4:00 | Repo scaffold: TS monorepo (`ingest/`, `db/`, `content/`, `render/`, `review/`), ESLint, Vitest, CI | Claude | D2 |
+| 4:00–5:00 | Write `CONTENT_POLICY.md`: exclusions, language rules, corrections and takedown process | Claude drafts, you approve | D3 |
+| 5:00–6:00 | Study 3 competitor channels, then **record and post 2 manual recaps** from today's incident list | You | D11 (input) |
 
-**Brand-safety note:** advertisers avoid graphic crime content. The editorial tone should be "informative, calm, neighborhood-useful" and never sensational. This applies to the sponsor pitch as much as to platform policy.
+**End of day:** accounts live, data source understood, first 2 posts up.
 
----
+### Day 2 — Wed Oct 14 · Data pipeline (about 10 hours)
 
-## 3. System architecture
-
-```
-[Hamilton Co. 911 CAD page]
-        │  poll every 3–5 min (Playwright, Render cron)
-        ▼
-[ingest/]  scrape → normalize → dedupe on Master Incident # → status history
-        │
-        ▼
-[db/]  Postgres + PostGIS (Render)  — incidents, status_events, geocodes, posts, sponsors
-        │
-        ├──► [geocode/]  US Census Geocoder (free) → fallback Nominatim; store block-level only
-        │
-        ├──► [content/]  rules filter (exclude EMS/medical, domestic, juveniles)
-        │                → LLM drafts script + caption + hashtags (facts only from CAD fields)
-        │
-        ├──► [render/]   Remotion (Node) 1080×1920 template: map + text + host VO slot → .mp4
-        │
-        ├──► [review/]   Review queue web app (Vercel): approve / edit / reject, upload VO
-        │                → human approval is REQUIRED before anything is posted
-        │
-        ├──► [publish/]  Phase 3a: manual upload from queue export
-        │                Phase 3b: YouTube Data API + TikTok Content Posting API (after audits)
-        │
-        └──► [web/]      Public map + daily recap archive + newsletter signup (Vercel)
-```
-
-**Stack choices**
-
-- **Python 3.12** for ingest, with Playwright because the table is rendered by JavaScript.
-- **Postgres + PostGIS on Render**, with **Render cron jobs** for the poller. The Render connector is already linked to this account.
-- **Next.js on Vercel** for the review queue and the public site. The Vercel connector is already linked.
-- **Remotion** for rendering. It is free for individuals and companies of up to 3 people; check the license if the team grows.
-- **Map tiles:** MapLibre with an OpenStreetMap-based style, or Mapbox, each with on-screen attribution. Do not use Google Maps static images, because its terms restrict this use.
-- **LLM drafting:** Claude API. The model gets only structured CAD fields and is told never to invent facts.
-
-**API publishing caveat:** YouTube API uploads from an unverified project are forced to *private* until the project passes Google's audit. TikTok's Content Posting API also needs an app audit before public posts. Phase 3 therefore starts with manual posting, and the audits are filed in Week 4.
-
----
-
-## 4. Phased plan
-
-### Phase 0 — Foundation (W1–W2: Oct 13 – Oct 25)
-
-1. Lock the brand name and handle, and register them on TikTok, YouTube, Instagram and a domain.
-2. Use **personal** TikTok and YouTube accounts. TikTok business accounts are ineligible for Creator Rewards.
-3. Write `docs/CONTENT_POLICY.md` (D3): the exclusion list, language rules ("reported," "dispatched," never "confirmed"), no names, block-level locations only, and a corrections process.
-4. Email the Hamilton County 911 district's public-information contact. Describe the project and ask about reuse and whether a data feed exists (D4).
-5. Find the data endpoint: inspect the page's network calls (XHR/JSON) and document the fields, values and refresh behavior (D5).
-6. Set up the repo: monorepo layout, CI, `.env.example`, and issue templates (D2).
-7. Post 5–10 **manual** test videos by hand to learn the format before automating it. Engagement data from these videos guides Phase 2.
-
-### Phase 1 — Data pipeline (W2–W4: Oct 19 – Nov 8)
-
-1. `ingest/`: a Playwright scraper with polite polling, retry with backoff, and an alert if parsing breaks (D6).
-2. `db/`: schema migrations for `incidents`, `status_events`, `geocodes`, `posts`, `sponsors` and `metrics` (D7).
-3. Deduplicate on Master Incident number, and track status changes (R→E→OS→T→H) as events.
-4. `geocode/`: Census Geocoder first and Nominatim as fallback, with a cache table. Snap locations to the block centroid; never store or show house-level points for display (D8).
-5. A rules filter that excludes EMS and medical calls, domestic calls, calls involving juveniles, and calls at schools and hospitals (D9).
-6. Deploy the poller as a Render cron job and Postgres on Render. Run for 14 days to collect baseline volume (D10).
-
-**Exit gate:** 7 days of uninterrupted capture with less than 1% parse failures and at least 90% geocode success.
-
-### Phase 2 — Content engine (W4–W6: Nov 2 – Nov 22)
-
-1. Define formats (D11):
-   - **Incident clip** (20–40 s): built for growth on major road closures, structure fires and large police responses.
-   - **Daily Recap** (60–90 s): the core earning format, posted every evening.
-   - **Weekly Top 5 / neighborhood trends** (60–120 s): evergreen and suited to sponsors.
-2. `content/`: LLM script and caption drafter with fact-locking. Every claim must map to a CAD field (D12).
-3. `render/`: Remotion templates for all three formats, with a map animation, lower-thirds, a disclaimer bar, a sponsor slot and a voiceover track (D13).
-4. `review/`: a review queue on Vercel for the day's candidates. It supports approve, edit, reject and voiceover upload, and exports .mp4 files with captions (D14).
-5. Create the host's voice and style guide, with recording settings and a 3-step script structure (hook → facts → useful takeaway) (D15).
-
-**Exit gate:** one person can produce the Daily Recap in **20 minutes or less** from opening the queue to an exported file.
-
-### Phase 3 — Publishing & growth (W6–W9: Nov 16 – Dec 13)
-
-1. Set a cadence: 1 Daily Recap every day, plus 1–2 incident clips a day when warranted. Post to both platforms (D16).
-2. Phase 3a: manual posting. File the YouTube API audit and the TikTok Content Posting API audit in Week 6 (D17).
-3. Build a metrics loop: pull views, retention, followers and comments into the `metrics` table, and send a weekly report (D18).
-4. Launch the public web map and recap archive, with newsletter signup, on Vercel and a custom domain (D19).
-5. Community: pin a corrections and "how this works" video, and answer comments every day.
-
-**Exit gate:** 30 consecutive days of posting, at least 3k followers on the leading platform, and the recap's average watch time at 50% or more.
-
-### Phase 4 — Monetization (W8–W16: Nov 30 – Jan 31)
-
-1. Build the media kit: audience geography, reach, engagement, the sponsor slot format and the rate card (D20).
-2. Make a list of 40 local sponsor prospects and pitch 10 a week. Aim to **close the first sponsor by W12** (D21).
-3. Set up an affiliate link page with 5–8 vetted products (D22).
-4. Watch the platform thresholds weekly. Apply for TikTok Creator Rewards and YPP as soon as each is eligible (D23).
-5. Track revenue in the `sponsors` table and on a monthly P&L sheet (D24).
-
-**Exit gate:** at least $500 a month in recurring revenue from any mix of streams by Jan 31, 2027.
-
-### Phase 5 — Scale (Feb – Apr 2027)
-
-1. Turn on API auto-publishing once the audits pass. A human still approves every post.
-2. Expand to a second area, such as Walker or Catoosa County in Georgia or Bradley County, by reusing the pipeline (D25).
-3. Reconsider scanner audio only after a written legal review (D26).
-4. Build a data and clip licensing offer for local media (D27).
-
----
-
-## 5. Deliverables register
-
-| ID | Deliverable | Repo path / location | Acceptance criteria |
+| Time | Task | Who | Deliverable |
 |---|---|---|---|
-| D1 | Implementation plan + crosswalk (this file) | `docs/` | Committed and reviewed by the owner |
-| D2 | Repo scaffold + CI | `/`, `.github/workflows/` | Lint and tests run on every PR |
-| D3 | Content & safety policy | `docs/CONTENT_POLICY.md` | Exclusions, language rules and corrections process written |
-| D4 | 911 district outreach record | `docs/legal/911_outreach.md` | Email sent; reply logged |
-| D5 | Data source spec | `docs/DATA_SOURCE.md` | Endpoint, fields, values and refresh behavior documented with samples |
-| D6 | CAD scraper | `ingest/` | Parses all columns; unit tests run against saved HTML fixtures |
-| D7 | Database schema | `db/migrations/` | Migrations apply cleanly on Render Postgres |
-| D8 | Geocoder + cache | `geocode/` | At least 90% match rate; outputs block-level points |
-| D9 | Exclusion filter | `content/filters.py` | 100% of EMS, domestic and juvenile test cases excluded |
-| D10 | Production poller on Render | Render cron | 7 days at 99% or better uptime |
-| D11 | Format spec (3 formats) | `docs/FORMATS.md` | Length, structure and visual layout per format |
-| D12 | Script drafter | `content/` | No claims beyond CAD fields in a 50-sample audit |
-| D13 | Render templates | `render/` | 1080×1920 30fps .mp4 with captions, attribution and disclaimer |
-| D14 | Review queue app | `review/` (Vercel) | Approve, edit, reject, VO upload and export work end to end |
-| D15 | Host voice & style guide | `docs/HOST_GUIDE.md` | Script template and recording checklist |
-| D16 | Posting calendar | `docs/CALENDAR.md` | 30 days of consecutive posts logged |
-| D17 | API audit applications | `docs/legal/api_audits.md` | YouTube and TikTok submissions filed |
-| D18 | Metrics collector + weekly report | `metrics/` | Automated weekly report generated |
-| D19 | Public web map + newsletter | `web/` (Vercel) | Live on custom domain; signup works |
-| D20 | Media kit + rate card | `sales/media_kit` | PDF and one-page web version |
-| D21 | Sponsor pipeline (40 prospects) | `sales/pipeline.csv` | 40 prospects, at least 10 pitched, first close |
-| D22 | Affiliate link page | `web/` | Live with disclosures |
-| D23 | Platform monetization applications | `docs/MONETIZATION_LOG.md` | Applied on reaching eligibility |
-| D24 | Revenue tracker / P&L | `sales/` | Monthly P&L for Dec and Jan |
-| D25 | Second-area expansion | `ingest/sources/` | Second source live in prod |
-| D26 | Scanner-audio legal memo | `docs/legal/` | Written opinion before any audio use |
-| D27 | Licensing offer | `sales/` | One-page offer sent to 5 outlets |
+| 8:00–12:00 | `ingest/`: Playwright scraper. Parse all columns, use polite polling with backoff, alert on parse errors, and test against fixtures. | You + Claude | D6 |
+| 12:30–2:30 | `db/`: migrations for `incidents`, `status_events`, `geocodes`, `posts` and `sponsors`. Upsert on Master Incident number and record each status change as an event. | You (your SQL strength) | D7 |
+| 2:30–5:00 | Deploy Postgres and the poller as a Render cron job running every 4 minutes. Confirm rows arrive. | You + Claude | D10 |
+| 5:00–6:00 | Daily post: a manual recap | You | D16 |
+
+**End of day:** live incidents are flowing into Postgres in production.
+
+### Day 3 — Thu Oct 15 · Enrichment + script drafting (about 10 hours)
+
+| Time | Task | Who | Deliverable |
+|---|---|---|---|
+| 8:00–10:30 | `geocode/`: Census Geocoder with a Nominatim fallback, a cache table, and points snapped to the block | Claude + you | D8 |
+| 10:30–12:00 | `content/filters.ts`: exclusion rules with a test suite | Claude | D9 |
+| 12:30–3:30 | `content/draft.ts`: a Claude API prompt that turns the day's eligible incidents into a recap script, caption and hashtags. **Fact-locked:** every sentence must map to a CAD field. Audit 20 samples. | You + Claude | D12 |
+| 3:30–5:00 | Format spec: Incident Clip (20–40 s) and Daily Recap (60–90 s). Each uses a hook → facts → takeaway structure, plus sponsor slot rules. | You | D11 |
+| 5:00–6:00 | Daily post | You | D16 |
+
+**End of day:** the pipeline outputs a ready-to-read recap script every evening.
+
+### Day 4 — Fri Oct 16 · Video templates (about 10 hours)
+
+| Time | Task | Who | Deliverable |
+|---|---|---|---|
+| 8:00–12:00 | `render/`: Remotion project at 1080×1920 and 30fps. **Daily Recap** template: animated map pins, incident cards, lower-thirds, disclaimer bar, sponsor card slot and voiceover track. | You (React) + Claude | D13 |
+| 12:30–3:00 | **Incident Clip** template, and captions burned in from the voiceover via auto-transcribe | You + Claude | D13 |
+| 3:00–4:30 | Render script: pull the day's data and voiceover file, then output an .mp4 | Claude | D13 |
+| 4:30–5:00 | Host guide: recording setup (phone + lav mic), script template, delivery notes | Claude | D15 |
+| 5:00–6:00 | Record a voiceover and render the **first pipeline-made recap**. Post it. | You | D16 |
+
+**End of day:** a real recap built by the pipeline is published.
+
+### Day 5 — Sat Oct 17 · Review queue + end-to-end (about 9 hours)
+
+| Time | Task | Who | Deliverable |
+|---|---|---|---|
+| 8:00–12:30 | `review/`: a Vite + React app on Vercel. It lists today's draft, lets you edit the script, upload a voiceover, approve to trigger a render, and download the .mp4 and caption. It is protected by a password. | You + Claude | D14 |
+| 1:00–3:00 | End-to-end test: data → draft → edit → voiceover → render → download → post. **Time it, with a target of 20 minutes or less.** | You | D14 gate |
+| 3:00–4:00 | Fix whatever made the run slow | You + Claude | — |
+| 4:00–5:00 | Post a recap and 1 incident clip | You | D16 |
+
+**End of day:** the daily routine is repeatable in about 20 minutes.
+
+### Day 6 — Sun Oct 18 · Monetization assets (about 9 hours)
+
+| Time | Task | Who | Deliverable |
+|---|---|---|---|
+| 8:00–10:00 | Link page (a Vercel static page) with affiliate links for 5–8 vetted products: cameras, dashcams, doorbells. Include disclosures. | You + Claude | D22 |
+| 10:00–12:30 | Media kit and rate card: the concept, audience geography, posting cadence, sponsor slot formats and launch-sponsor pricing. Use launch rates, since the channel has no stats yet. | Claude drafts, you finalize | D20 |
+| 1:00–3:30 | Sponsor prospect list of 40 local businesses: security and alarm, locksmiths, PI and defense attorneys, insurance agents, towing, auto glass, self-defense gyms. Collect names, contacts and a personalized hook for each. | You + Claude research | D21 |
+| 3:30–4:30 | Pitch email, DM and call script with a follow-up sequence | Claude | D21 |
+| 4:30–5:30 | Posting calendar for the next 30 days, and a manual metrics sheet | Claude | D16, D18 |
+| 5:30–6:30 | Post a recap and a "how this channel works / corrections" pinned video | You | D16 |
+
+**End of day:** everything needed to sell is ready.
+
+### Day 7 — Mon Oct 19 · Sell + harden + hand off (about 10 hours)
+
+| Time | Task | Who | Deliverable |
+|---|---|---|---|
+| 8:30–12:00 | **Send 15+ sponsor pitches** by email and DM, and make 5 calls during business hours. Offer a **free first week** to the first 2 sponsors to get a case study. | You | D21 |
+| 12:30–1:30 | File the YouTube API audit and TikTok Content Posting API application | You + Claude | D17 |
+| 1:30–3:30 | Hardening: parser-failure alerts, Render log checks, database backup, README run-book | Claude | D10, D2 |
+| 3:30–4:30 | Log the monetization thresholds you're tracking. Note whether YouTube's lower tier is available in Studio. | You | D23 |
+| 4:30–5:30 | Sprint retro, and lock in the steady-state routine (§6) | You + Claude | D24 |
+| 5:30–6:30 | Post a recap and an incident clip | You | D16 |
+
+**End of day:** the system is live, 8–10 videos are published, 15+ pitches are out and affiliate links are live.
 
 ---
 
-## 6. Crosswalk — deliverables × phase × timeframe × monetization lever
+## 4. Deliverables register
 
-*Weeks start Monday. W1 is the partial week of Oct 13–18, 2026.*
+| ID | Deliverable | Location | Acceptance criteria |
+|---|---|---|---|
+| D1 | Brand + accounts | TikTok, YouTube, domain | Personal accounts with bios, links and profile art |
+| D2 | Repo scaffold + CI + run-book | `/`, `.github/` | CI green; README explains deploy and daily routine |
+| D3 | Content & safety policy | `docs/CONTENT_POLICY.md` | Exclusions, language rules and takedown SLA |
+| D4 | 911 district outreach | `docs/legal/911_outreach.md` | Sent; reply logged |
+| D5 | Data source spec + fixtures | `docs/DATA_SOURCE.md`, `ingest/fixtures/` | Fields and status codes documented; 3 fixtures |
+| D6 | CAD scraper | `ingest/` | All columns parsed; fixture tests pass |
+| D7 | DB schema | `db/migrations/` | Applies on Render; upsert + status history work |
+| D8 | Geocoder | `geocode/` | At least 90% match; block-level output |
+| D9 | Exclusion filter | `content/filters.ts` | 100% of excluded test cases blocked |
+| D10 | Production poller | Render cron | Running every 4 minutes with alerts |
+| D11 | Format spec | `docs/FORMATS.md` | Two formats, recap over 60 seconds |
+| D12 | Script drafter | `content/draft.ts` | 20-sample audit shows no invented facts |
+| D13 | Remotion templates + render script | `render/` | 1080×1920 .mp4 with captions, attribution, disclaimer |
+| D14 | Review queue app | `review/` on Vercel | Full run in 20 minutes or less |
+| D15 | Host guide | `docs/HOST_GUIDE.md` | Setup + script template |
+| D16 | Posts + 30-day calendar | `docs/CALENDAR.md` | 8–10 videos posted during the sprint |
+| D17 | API audit applications | `docs/legal/api_audits.md` | Both filed |
+| D18 | Metrics sheet | `sales/metrics.csv` | Daily views and followers logged |
+| D20 | Media kit + rate card | `sales/` | PDF + one-pager |
+| D21 | Sponsor pipeline + scripts | `sales/pipeline.csv`, `sales/scripts.md` | 40 prospects, 15+ pitched |
+| D22 | Link page + affiliate | `web/` on Vercel | Live with disclosures |
+| D23 | Monetization threshold log | `docs/MONETIZATION_LOG.md` | Thresholds and current status logged |
+| D24 | Retro + steady-state routine | `docs/OPERATIONS.md` | Daily and weekly routine defined |
 
-| ID | Phase | Weeks | Dates | Owner | Depends on | Monetization lever it unlocks |
-|---|---|---|---|---|---|---|
-| D1 | 0 | W1 | Oct 13 – 18 | Claude | — | All (roadmap) |
-| D2 | 0 | W1 | Oct 13 – 18 | Claude | — | All (build base) |
-| D3 | 0 | W1–W2 | Oct 13 – 25 | You + Claude | — | Brand safety → sponsors; platform good standing |
-| D4 | 0 | W1 | Oct 13 – 18 | You | — | Risk reduction (data access) |
-| D5 | 0 | W1–W2 | Oct 14 – 22 | Claude | — | Pipeline |
-| D6 | 1 | W2–W3 | Oct 19 – Nov 1 | Claude | D5 | Pipeline |
-| D7 | 1 | W2 | Oct 19 – 25 | Claude | D5 | Pipeline; sponsor/revenue tracking |
-| D8 | 1 | W3 | Oct 26 – Nov 1 | Claude | D6, D7 | Map visuals; web map |
-| D9 | 1 | W3 | Oct 26 – Nov 1 | Claude | D3, D6 | Brand safety → sponsors |
-| D10 | 1 | W3–W4 | Oct 29 – Nov 8 | Claude + You (Render) | D6–D9 | Data archive → licensing (D27) |
-| D11 | 2 | W4 | Nov 2 – 8 | You + Claude | Manual test posts | **Daily Recap over 1 min → TikTok Creator Rewards** |
-| D12 | 2 | W4–W5 | Nov 2 – 15 | Claude | D10, D11 | Originality (host + facts) → YPP/TikTok eligibility |
-| D13 | 2 | W4–W6 | Nov 2 – 22 | Claude | D11 | Sponsor slot built into template |
-| D14 | 2 | W5–W6 | Nov 9 – 22 | Claude | D12, D13 | Human review → passes inauthentic-content policy |
-| D15 | 2 | W5 | Nov 9 – 15 | You | D11 | Originality; host trust → sponsors |
-| D16 | 3 | W6–W9 | Nov 16 – Dec 13 | You | D14 | Audience growth toward 10k / 1k-sub thresholds |
-| D17 | 3 | W6 | Nov 16 – 22 | You + Claude | D14 | Automation at scale (Phase 5) |
-| D18 | 3 | W7 | Nov 23 – 29 | Claude | D16 | Media-kit stats; threshold tracking |
-| D19 | 3 | W7–W9 | Nov 23 – Dec 13 | Claude | D8, D10 | Owned audience: newsletter + display ads |
-| D20 | 4 | W8–W9 | Nov 30 – Dec 13 | You + Claude | D18 | **Sponsorship (primary revenue)** |
-| D21 | 4 | W9–W12 | Dec 7 – Jan 3 | You | D20 | **Sponsorship: first close by W12** |
-| D22 | 4 | W8 | Nov 30 – Dec 6 | You + Claude | D19 | Affiliate |
-| D23 | 4 | W10–W16 | Dec 14 – Jan 31 | You | D16, D18 | **TikTok Creator Rewards; YPP** |
-| D24 | 4 | W10, W14 | Dec 14 + Jan 11 | You + Claude | D21 | Revenue visibility |
-| D25 | 5 | Feb – Mar 2027 | — | Claude | D10 stable | Larger audience → higher sponsor rates |
-| D26 | 5 | Feb 2027 | — | You (attorney) | — | Richer content (audio), if cleared |
-| D27 | 5 | Mar – Apr 2027 | — | You + Claude | D10 (90+ days of data) | Data licensing |
+*D19 (the public web map) moved to post-sprint.*
 
-### Milestone timeline
+---
 
-| Milestone | Target date |
+## 5. Crosswalk — deliverable × day × hours × skill fit × revenue lever
+
+| ID | Day | Date | Hours | Owner | Your skill fit | Depends on | Monetization lever |
+|---|---|---|---|---|---|---|---|
+| D1 | 1 | Tue Oct 13 | 1 | You | — | — | Accounts are prerequisite for all payouts |
+| D4 | 1 | Tue Oct 13 | 0.5 | You | — | — | Protects data access, and so the business |
+| D5 | 1 | Tue Oct 13 | 1.5 | You + Claude | HL7 field mapping (strong) | — | Pipeline |
+| D2 | 1 | Tue Oct 13 | 1 | Claude | Node (strong) | — | Pipeline |
+| D3 | 1 | Tue Oct 13 | 1 | Claude → You | PHI privacy (strong) | — | Brand safety → sponsors; platform standing |
+| D6 | 2 | Wed Oct 14 | 4 | You + Claude | Bots/polling (strong) | D5 | Pipeline |
+| D7 | 2 | Wed Oct 14 | 2 | You | SQL (strong) | D5 | Sponsor stats; trend videos |
+| D10 | 2 | Wed Oct 14 | 2.5 | You + Claude | Deploys (medium) | D6, D7 | Data archive → future licensing |
+| D8 | 3 | Thu Oct 15 | 2.5 | Claude + You | APIs (strong) | D7 | Map visuals |
+| D9 | 3 | Thu Oct 15 | 1.5 | Claude | — | D3 | Brand safety → sponsors |
+| D12 | 3 | Thu Oct 15 | 3 | You + Claude | — | D9 | Original content → TikTok and YouTube eligibility |
+| D11 | 3 | Thu Oct 15 | 1.5 | You | Short-form (gap) | Day 1 posts | **Recap over 60 seconds → TikTok Creator Rewards** |
+| D13 | 4 | Fri Oct 16 | 6.5 | You + Claude | React (strong) | D11, D12 | Sponsor card slot built in |
+| D15 | 4 | Fri Oct 16 | 0.5 | Claude | On-camera (gap) | D11 | Human voice → passes inauthentic-content policy |
+| D14 | 5 | Sat Oct 17 | 7.5 | You + Claude | React/Vite (strong) | D12, D13 | 20-minute routine → sustainable daily output |
+| D22 | 6 | Sun Oct 18 | 2 | You + Claude | Frontend (strong) | D1 | **Affiliate: first possible revenue** |
+| D20 | 6 | Sun Oct 18 | 2.5 | Claude → You | Sales (gap) | D16 | **Sponsorship** |
+| D21 | 6–7 | Oct 18–19 | 7.5 | You + Claude | Sales (gap) | D20 | **Sponsorship: 15+ pitches** |
+| D16 | 1–7 | Daily | about 7 | You | Hosting (gap) | — | Audience growth toward payout thresholds |
+| D18 | 6 | Sun Oct 18 | 0.5 | Claude | Data analysis (strong) | D16 | Media-kit stats |
+| D17 | 7 | Mon Oct 19 | 1 | You + Claude | — | D14 | Future automation at scale |
+| D23 | 7 | Mon Oct 19 | 1 | You | — | D16 | **TikTok Creator Rewards; YouTube Partner Program** |
+| D24 | 7 | Mon Oct 19 | 1 | You + Claude | — | All | Keeps revenue work going after the sprint |
+
+**Hours:** about 65 total. About 40 are build hours, mostly in your strong skills. About 25 are posting, hosting and selling, which are your gaps and the work that actually produces revenue.
+
+---
+
+## 6. After the sprint — steady state (2–3 hours a day)
+
+| Cadence | Task |
 |---|---|
-| Data endpoint documented; 911 email sent | Oct 22, 2026 |
-| Poller live in production | Nov 1, 2026 |
-| First automated-draft Daily Recap posted | Nov 16, 2026 |
-| Public web map live | Dec 13, 2026 |
-| Media kit ready; sponsor outreach begins | Dec 13, 2026 |
-| First paid sponsor | Jan 3, 2027 |
-| At least $500/month recurring revenue | Jan 31, 2027 |
-| Second area live | Mar 31, 2027 |
+| Daily (about 45 min) | Review queue → record voiceover → post the recap and 1 clip → reply to comments |
+| Daily (about 30 min) | 3–5 sponsor follow-ups or new pitches |
+| Weekly | Weekly Top 5 trend video, metrics review and pipeline health check |
+
+**Revenue milestones after the sprint**
+
+| Target | Date |
+|---|---|
+| First 2 sponsors running, on the free first week | by Nov 2 |
+| First paid sponsor | by Nov 16 |
+| $500/month recurring revenue | by Dec 31 |
+| Check TikTok Creator Rewards eligibility weekly | Ongoing |
 
 ---
 
-## 7. KPIs & go/no-go gates
-
-| Metric | Week 8 target | Week 16 target |
-|---|---|---|
-| Followers (best platform) | 3,000 | 10,000 |
-| 30-day views (TikTok) | 50,000 | 100,000+ (Creator Rewards threshold) |
-| Daily Recap avg. watch % | 45% | 55% |
-| Posts published on schedule | 90% | 95% |
-| Corrections issued / posts | < 2% | < 1% |
-| Recurring revenue | $0–150 | $500+ |
-
-**Week 9 review:** if recap retention is below 35% after 30 days, rework the format, hook and host delivery before scaling volume. More posts will not fix weak retention.
-
----
-
-## 8. Risks & guardrails
+## 7. Risks
 
 | Risk | Mitigation |
 |---|---|
-| Demonetization for templated or AI content | Host voiceover and commentary on every earning video, human approval, varied formats and a clear channel About section |
-| Defamation / false reports | Facts come only from CAD fields, with "reported/dispatched" language, no names, a corrections pin and a 24-hour takedown SLA |
-| Privacy (victims, medical calls) | Exclude EMS, domestic and juvenile calls; show block-level locations only; never show residences |
-| County blocks scraping or changes the page | Permission request (D4), polite polling, parser alerts, fixture-based tests and a manual fallback |
-| Platform crime-content restrictions | No graphic imagery, calm tone and community-safety framing |
-| Copyright / ToS for map tiles and music | Licensed tiles with attribution; platform-library music only |
-| Burnout from a daily cadence | The 20-minute production gate (Phase 2) and batch-recorded weekly segments |
+| Restarting instead of finishing (your repo history) | One repo, deploy every day, cut scope rather than slip it |
+| Demonetization for templated AI content | Your voice and approval on every video |
+| False reports or defamation | Fact-locked drafts, "reported" wording, no names, pinned corrections video |
+| County blocks scraping or changes the page | Day 1 email, polite polling, parse alerts, manual fallback |
+| Selling feels uncomfortable | Scripts written for you, and a free first week lowers the bar |
 
-*This plan is not legal advice. Have a Tennessee media attorney review D3 and D26 before monetization begins.*
-
----
-
-## 9. This week's checklist (W1: Oct 13 – 18)
-
-- [ ] **You:** pick the brand name and handles; register personal TikTok and YouTube accounts
-- [ ] **You:** send the email to the Hamilton County 911 district (Claude can draft it)
-- [ ] **You:** record 3 manual test recaps from today's incident list
-- [ ] **Claude:** scaffold the repo (D2), draft CONTENT_POLICY.md (D3), and investigate the CAD endpoint (D5)
-
-## 10. Open questions for the owner
-
-1. Brand name / handle?
-2. Will you be the on-camera or voice host, or will someone else?
-3. Budget for tools: Render, Vercel, domain, LLM API, and possibly Mapbox. The planning estimate is under $75 a month in Phases 1–3.
-4. Are you operating as an individual or forming an LLC? Sponsorship contracts and liability affect this choice.
+*This plan is not legal advice. Have a Tennessee media attorney review CONTENT_POLICY.md before taking paid sponsors.*

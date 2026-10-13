@@ -1,28 +1,24 @@
-ID,Deliverable,Phase,Weeks,Dates,Owner,Depends on,Monetization lever,Repo path,Acceptance criteria,Status
-D1,Implementation plan + crosswalk,0,W1,Oct 13 – 18,Claude,—,All (roadmap),docs/,Committed and reviewed by the owner,Done
-D2,Repo scaffold + CI,0,W1,Oct 13 – 18,Claude,—,All (build base),"/, .github/workflows/",Lint and tests run on every PR,Not started
-D3,Content & safety policy,0,W1–W2,Oct 13 – 25,You + Claude,—,Brand safety → sponsors; platform good standing,docs/CONTENT_POLICY.md,"Exclusions, language rules and corrections process written",Not started
-D4,911 district outreach record,0,W1,Oct 13 – 18,You,—,Risk reduction (data access),docs/legal/911_outreach.md,Email sent; reply logged,Not started
-D5,Data source spec,0,W1–W2,Oct 14 – 22,Claude,—,Pipeline,docs/DATA_SOURCE.md,"Endpoint, fields, values and refresh behavior documented with samples",Not started
-D6,CAD scraper,1,W2–W3,Oct 19 – Nov 1,Claude,D5,Pipeline,ingest/,Parses all columns; unit tests run against saved HTML fixtures,Not started
-D7,Database schema,1,W2,Oct 19 – 25,Claude,D5,Pipeline; sponsor/revenue tracking,db/migrations/,Migrations apply cleanly on Render Postgres,Not started
-D8,Geocoder + cache,1,W3,Oct 26 – Nov 1,Claude,"D6, D7",Map visuals; web map,geocode/,At least 90% match rate; outputs block-level points,Not started
-D9,Exclusion filter,1,W3,Oct 26 – Nov 1,Claude,"D3, D6",Brand safety → sponsors,content/filters.py,"100% of EMS, domestic and juvenile test cases excluded",Not started
-D10,Production poller on Render,1,W3–W4,Oct 29 – Nov 8,Claude + You (Render),D6–D9,Data archive → licensing (D27),Render cron,7 days at 99% or better uptime,Not started
-D11,Format spec (3 formats),2,W4,Nov 2 – 8,You + Claude,Manual test posts,Daily Recap over 1 min → TikTok Creator Rewards,docs/FORMATS.md,"Length, structure and visual layout per format",Not started
-D12,Script drafter,2,W4–W5,Nov 2 – 15,Claude,"D10, D11",Originality (host + facts) → YPP/TikTok eligibility,content/,No claims beyond CAD fields in a 50-sample audit,Not started
-D13,Render templates,2,W4–W6,Nov 2 – 22,Claude,D11,Sponsor slot built into template,render/,"1080×1920 30fps .mp4 with captions, attribution and disclaimer",Not started
-D14,Review queue app,2,W5–W6,Nov 9 – 22,Claude,"D12, D13",Human review → passes inauthentic-content policy,review/ (Vercel),"Approve, edit, reject, VO upload and export work end to end",Not started
-D15,Host voice & style guide,2,W5,Nov 9 – 15,You,D11,Originality; host trust → sponsors,docs/HOST_GUIDE.md,Script template and recording checklist,Not started
-D16,Posting calendar,3,W6–W9,Nov 16 – Dec 13,You,D14,Audience growth toward 10k / 1k-sub thresholds,docs/CALENDAR.md,30 days of consecutive posts logged,Not started
-D17,API audit applications,3,W6,Nov 16 – 22,You + Claude,D14,Automation at scale (Phase 5),docs/legal/api_audits.md,YouTube and TikTok submissions filed,Not started
-D18,Metrics collector + weekly report,3,W7,Nov 23 – 29,Claude,D16,Media-kit stats; threshold tracking,metrics/,Automated weekly report generated,Not started
-D19,Public web map + newsletter,3,W7–W9,Nov 23 – Dec 13,Claude,"D8, D10",Owned audience: newsletter + display ads,web/ (Vercel),Live on custom domain; signup works,Not started
-D20,Media kit + rate card,4,W8–W9,Nov 30 – Dec 13,You + Claude,D18,Sponsorship (primary revenue),sales/media_kit,PDF and one-page web version,Not started
-D21,Sponsor pipeline (40 prospects),4,W9–W12,Dec 7 – Jan 3,You,D20,Sponsorship: first close by W12,sales/pipeline.csv,"40 prospects, at least 10 pitched, first close",Not started
-D22,Affiliate link page,4,W8,Nov 30 – Dec 6,You + Claude,D19,Affiliate,web/,Live with disclosures,Not started
-D23,Platform monetization applications,4,W10–W16,Dec 14 – Jan 31,You,"D16, D18",TikTok Creator Rewards; YPP,docs/MONETIZATION_LOG.md,Applied on reaching eligibility,Not started
-D24,Revenue tracker / P&L,4,"W10, W14",Dec 14 + Jan 11,You + Claude,D21,Revenue visibility,sales/,Monthly P&L for Dec and Jan,Not started
-D25,Second-area expansion,5,Feb – Mar 2027,—,Claude,D10 stable,Larger audience → higher sponsor rates,ingest/sources/,Second source live in prod,Not started
-D26,Scanner-audio legal memo,5,Feb 2027,—,You (attorney),—,"Richer content (audio), if cleared",docs/legal/,Written opinion before any audio use,Not started
-D27,Licensing offer,5,Mar – Apr 2027,—,You + Claude,D10 (90+ days of data),Data licensing,sales/,One-page offer sent to 5 outlets,Not started
+ID,Deliverable,Day,Date,Hours,Owner,Skill fit,Depends on,Monetization lever,Location,Acceptance criteria,Status
+D1,Brand + accounts,1,Tue Oct 13,1,You,—,—,Accounts are prerequisite for all payouts,"TikTok, YouTube, domain","Personal accounts with bios, links and profile art",Not started
+D4,911 district outreach,1,Tue Oct 13,0.5,You,—,—,"Protects data access, and so the business",docs/legal/911_outreach.md,Sent; reply logged,Not started
+D5,Data source spec + fixtures,1,Tue Oct 13,1.5,You + Claude,HL7 field mapping (strong),—,Pipeline,"docs/DATA_SOURCE.md, ingest/fixtures/",Fields and status codes documented; 3 fixtures,Not started
+D2,Repo scaffold + CI + run-book,1,Tue Oct 13,1,Claude,Node (strong),—,Pipeline,"/, .github/",CI green; README explains deploy and daily routine,Not started
+D3,Content & safety policy,1,Tue Oct 13,1,Claude → You,PHI privacy (strong),—,Brand safety → sponsors; platform standing,docs/CONTENT_POLICY.md,"Exclusions, language rules and takedown SLA",Not started
+D6,CAD scraper,2,Wed Oct 14,4,You + Claude,Bots/polling (strong),D5,Pipeline,ingest/,All columns parsed; fixture tests pass,Not started
+D7,DB schema,2,Wed Oct 14,2,You,SQL (strong),D5,Sponsor stats; trend videos,db/migrations/,Applies on Render; upsert + status history work,Not started
+D10,Production poller,2,Wed Oct 14,2.5,You + Claude,Deploys (medium),"D6, D7",Data archive → future licensing,Render cron,Running every 4 minutes with alerts,Not started
+D8,Geocoder,3,Thu Oct 15,2.5,Claude + You,APIs (strong),D7,Map visuals,geocode/,At least 90% match; block-level output,Not started
+D9,Exclusion filter,3,Thu Oct 15,1.5,Claude,—,D3,Brand safety → sponsors,content/filters.ts,100% of excluded test cases blocked,Not started
+D12,Script drafter,3,Thu Oct 15,3,You + Claude,—,D9,Original content → TikTok and YouTube eligibility,content/draft.ts,20-sample audit shows no invented facts,Not started
+D11,Format spec,3,Thu Oct 15,1.5,You,Short-form (gap),Day 1 posts,Recap over 60 seconds → TikTok Creator Rewards,docs/FORMATS.md,"Two formats, recap over 60 seconds",Not started
+D13,Remotion templates + render script,4,Fri Oct 16,6.5,You + Claude,React (strong),"D11, D12",Sponsor card slot built in,render/,"1080×1920 .mp4 with captions, attribution, disclaimer",Not started
+D15,Host guide,4,Fri Oct 16,0.5,Claude,On-camera (gap),D11,Human voice → passes inauthentic-content policy,docs/HOST_GUIDE.md,Setup + script template,Not started
+D14,Review queue app,5,Sat Oct 17,7.5,You + Claude,React/Vite (strong),"D12, D13",20-minute routine → sustainable daily output,review/ on Vercel,Full run in 20 minutes or less,Not started
+D22,Link page + affiliate,6,Sun Oct 18,2,You + Claude,Frontend (strong),D1,Affiliate: first possible revenue,web/ on Vercel,Live with disclosures,Not started
+D20,Media kit + rate card,6,Sun Oct 18,2.5,Claude → You,Sales (gap),D16,Sponsorship,sales/,PDF + one-pager,Not started
+D21,Sponsor pipeline + scripts,6–7,Oct 18–19,7.5,You + Claude,Sales (gap),D20,Sponsorship: 15+ pitches,"sales/pipeline.csv, sales/scripts.md","40 prospects, 15+ pitched",Not started
+D16,Posts + 30-day calendar,1–7,Daily,about 7,You,Hosting (gap),—,Audience growth toward payout thresholds,docs/CALENDAR.md,8–10 videos posted during the sprint,Not started
+D18,Metrics sheet,6,Sun Oct 18,0.5,Claude,Data analysis (strong),D16,Media-kit stats,sales/metrics.csv,Daily views and followers logged,Not started
+D17,API audit applications,7,Mon Oct 19,1,You + Claude,—,D14,Future automation at scale,docs/legal/api_audits.md,Both filed,Not started
+D23,Monetization threshold log,7,Mon Oct 19,1,You,—,D16,TikTok Creator Rewards; YouTube Partner Program,docs/MONETIZATION_LOG.md,Thresholds and current status logged,Not started
+D24,Retro + steady-state routine,7,Mon Oct 19,1,You + Claude,—,All,Keeps revenue work going after the sprint,docs/OPERATIONS.md,Daily and weekly routine defined,Not started
