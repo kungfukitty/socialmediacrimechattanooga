@@ -1,24 +1,19 @@
-ID,Deliverable,Day,Date,Hours,Owner,Skill fit,Depends on,Monetization lever,Location,Acceptance criteria,Status
-D1,Brand + accounts,1,Tue Oct 13,1,You,—,—,Accounts are prerequisite for all payouts,"TikTok, YouTube, domain","Personal accounts with bios, links and profile art",Not started
-D4,911 district outreach,1,Tue Oct 13,0.5,You,—,—,"Protects data access, and so the business",docs/legal/911_outreach.md,Sent; reply logged,Drafted — owner to send
-D5,Data source spec + fixtures,1,Tue Oct 13,1.5,You + Claude,HL7 field mapping (strong),—,Pipeline,"docs/DATA_SOURCE.md, ingest/fixtures/",Fields and status codes documented; 3 fixtures,Spec drafted — owner to capture fixtures
-D2,Repo scaffold + CI + run-book,1,Tue Oct 13,1,Claude,Node (strong),—,Pipeline,"/, .github/",CI green; README explains deploy and daily routine,Done
-D3,Content & safety policy,1,Tue Oct 13,1,Claude → You,PHI privacy (strong),—,Brand safety → sponsors; platform standing,docs/CONTENT_POLICY.md,"Exclusions, language rules and takedown SLA",Drafted — owner to approve
-D6,CAD scraper,2,Wed Oct 14,4,You + Claude,Bots/polling (strong),D5,Pipeline,ingest/,All columns parsed; fixture tests pass,Not started
-D7,DB schema,2,Wed Oct 14,2,You,SQL (strong),D5,Sponsor stats; trend videos,db/migrations/,Applies on Render; upsert + status history work,Not started
-D10,Production poller,2,Wed Oct 14,2.5,You + Claude,Deploys (medium),"D6, D7",Data archive → future licensing,Render cron,Running every 4 minutes with alerts,Not started
-D8,Geocoder,3,Thu Oct 15,2.5,Claude + You,APIs (strong),D7,Map visuals,geocode/,At least 90% match; block-level output,Not started
-D9,Exclusion filter,3,Thu Oct 15,1.5,Claude,—,D3,Brand safety → sponsors,content/filters.ts,100% of excluded test cases blocked,Not started
-D12,Script drafter,3,Thu Oct 15,3,You + Claude,—,D9,Original content → TikTok and YouTube eligibility,content/draft.ts,20-sample audit shows no invented facts,Not started
-D11,Format spec,3,Thu Oct 15,1.5,You,Short-form (gap),Day 1 posts,Recap over 60 seconds → TikTok Creator Rewards,docs/FORMATS.md,"Two formats, recap over 60 seconds",Not started
-D13,Remotion templates + render script,4,Fri Oct 16,6.5,You + Claude,React (strong),"D11, D12",Sponsor card slot built in,render/,"1080×1920 .mp4 with captions, attribution, disclaimer",Not started
-D15,Host guide,4,Fri Oct 16,0.5,Claude,On-camera (gap),D11,Human voice → passes inauthentic-content policy,docs/HOST_GUIDE.md,Setup + script template,Not started
-D14,Review queue app,5,Sat Oct 17,7.5,You + Claude,React/Vite (strong),"D12, D13",20-minute routine → sustainable daily output,review/ on Vercel,Full run in 20 minutes or less,Not started
-D22,Link page + affiliate,6,Sun Oct 18,2,You + Claude,Frontend (strong),D1,Affiliate: first possible revenue,web/ on Vercel,Live with disclosures,Not started
-D20,Media kit + rate card,6,Sun Oct 18,2.5,Claude → You,Sales (gap),D16,Sponsorship,sales/,PDF + one-pager,Not started
-D21,Sponsor pipeline + scripts,6–7,Oct 18–19,7.5,You + Claude,Sales (gap),D20,Sponsorship: 15+ pitches,"sales/pipeline.csv, sales/scripts.md","40 prospects, 15+ pitched",Not started
-D16,Posts + 30-day calendar,1–7,Daily,about 7,You,Hosting (gap),—,Audience growth toward payout thresholds,docs/CALENDAR.md,8–10 videos posted during the sprint,Not started
-D18,Metrics sheet,6,Sun Oct 18,0.5,Claude,Data analysis (strong),D16,Media-kit stats,sales/metrics.csv,Daily views and followers logged,Not started
-D17,API audit applications,7,Mon Oct 19,1,You + Claude,—,D14,Future automation at scale,docs/legal/api_audits.md,Both filed,Not started
-D23,Monetization threshold log,7,Mon Oct 19,1,You,—,D16,TikTok Creator Rewards; YouTube Partner Program,docs/MONETIZATION_LOG.md,Thresholds and current status logged,Not started
-D24,Retro + steady-state routine,7,Mon Oct 19,1,You + Claude,—,All,Keeps revenue work going after the sprint,docs/OPERATIONS.md,Daily and weekly routine defined,Not started
+ID,Deliverable,When,Time needed,Done when,Money it leads to,Status
+D1,"Name, handles, Gmail, TikTok + YouTube accounts",Oct 13,1 hr,All created with matching handles; TikTok set to Business/Creator,All platform payouts,Not started
+D2,911 district email,Oct 13,15 min,Sent; reply logged,Protects the source the page depends on,Not started
+D3,Profile + link page,Oct 14,1 hr,"Picture, bio, link page with corrections email and disclaimer","Affiliate clicks, sponsor contact",Not started
+D4,CapCut + Canva templates,Oct 14,2 hr,One edit template and one cover template,Cuts daily edit time to 45 min,Not started
+D5,Competitor notes,Oct 14,1 hr,3 pages reviewed; hooks and post times noted,Faster growth,Not started
+D6,Daily posting,"From Oct 15, daily",60–90 min/day,Recap daily; 2–3 posts/day from week 2,Followers and views → every payout,Not started
+D7,Affiliate setup,Oct 16–19,1 hr,Amazon Associates approved; 5–8 products with #ad disclosure,First possible income,Not started
+D8,Format test results,Week 2 (Oct 20–26),Ongoing,"Best hook, length and post time identified",Faster growth toward thresholds,Not started
+D9,Sponsor prospect list,Week 2 (Oct 20–26),3 hr,40 local businesses with contacts,Sponsorship,Not started
+D10,Media kit + rate card,Week 3 (Oct 27–Nov 2),2 hr,1-page PDF,Sponsorship,Not started
+D11,Sponsor pitches,Week 3 → ongoing,30 min/day,15 sent by Nov 2; first paid sponsor in month 2,Sponsorship: main early income,Not started
+D12,Monthly review,"Nov 9, Dec 10, Jan 10",1 hr each,Numbers logged; changes decided,Keeps plan on track,Not started
+D13,TikTok Shop affiliate + LIVE,Month 2 (at 1k followers),1 hr setup,Approved,"Shop commissions, LIVE gifts",Not started
+D14,Creator collaboration,Month 2 (Nov 10–Dec 10),2 hr,1 collab video posted,Follower growth,Not started
+D15,Seasonal series,Nov–Dec,Part of daily posting,Holiday safety series + year-end video,Sponsor-friendly content,Not started
+D16,Platform monetization applications,Month 2–3,30 min,Applied to Creator Rewards and YouTube tier when eligible,Creator Rewards; YouTube revenue,Not started
+D17,Sponsor packages,Month 3 (Dec 11–Jan 10),2 hr,Monthly pricing based on real stats,Recurring monthly income,Not started
+D18,90-day review,Jan 10,2 hr,"Keep, cut and next-step decisions written",Next 90 days,Not started

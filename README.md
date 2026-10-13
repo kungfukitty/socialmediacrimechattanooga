@@ -1,34 +1,10 @@
 # socialmediacrimechattanooga
 
-This is a short-form public-safety news channel for Chattanooga and Hamilton County, published on TikTok and YouTube Shorts. A data pipeline drafts each video from the county's public CAD active-incident list, and a human host reviews, narrates and publishes it.
+A TikTok and YouTube Shorts page covering daily public-safety activity in Chattanooga and Hamilton County. Videos are made by hand from the public Hamilton County 9-1-1 Active Incidents list, voiced by the host, and edited in CapCut.
 
-- **7-day sprint plan, skills review, deliverables and crosswalk:** [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md)
-- **Crosswalk (spreadsheet-ready):** [docs/crosswalk.csv](docs/crosswalk.csv)
+- **90-day plan, deliverables and crosswalk:** [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md)
+- **Crosswalk (spreadsheet):** [docs/crosswalk.csv](docs/crosswalk.csv)
+- **Content rules:** [docs/CONTENT_POLICY.md](docs/CONTENT_POLICY.md)
+- **911 district email:** [docs/legal/911_outreach.md](docs/legal/911_outreach.md)
 
-## Planned layout
-
-```
-ingest/    CAD scraper (Node/TypeScript + Playwright)
-db/        Postgres/PostGIS migrations
-geocode/   address → block-level coordinates
-content/   filters + script/caption drafting
-render/    Remotion vertical video templates
-review/    human approval queue (Vite + React on Vercel)
-metrics/   platform analytics collector
-web/       public map, recap archive, newsletter
-sales/     media kit, sponsor pipeline, revenue
-docs/      plan, policies, legal records
-```
-
-Videos describe dispatched and reported incidents only. They are not official statements from any agency.
-
-## Development
-
-Requires Node 20+.
-
-```
-npm install
-npm run check    # typecheck + lint + tests (same as CI)
-```
-
-Copy `.env.example` to `.env` for local secrets. Policies: [docs/CONTENT_POLICY.md](docs/CONTENT_POLICY.md) · Data source: [docs/DATA_SOURCE.md](docs/DATA_SOURCE.md)
+Videos describe reported and dispatched incidents only. They are not official statements from any agency.
