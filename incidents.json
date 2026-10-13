@@ -1,0 +1,338 @@
+{
+  "generated_at": "2026-10-13T12:06:20",
+  "source": "https://www.hamiltontn911.gov/active-incidents.php",
+  "simulated": true,
+  "disclaimer": "Based on public 9-1-1 dispatch data. Not an official statement. Details may change.",
+  "incidents": [
+    {
+      "id": "SIM-261013-2938",
+      "type": "Road Closure",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Road Closure - Crash",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T11:59:20",
+      "location": "400 block of Market St",
+      "lat": 35.051,
+      "lng": -85.31,
+      "script": "Heads up. A road closure was reported at the 400 block of Market Street in Chattanooga. The call came in around 11:59 AM. Expect delays and use another route.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9360",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Shots Fired Call",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T11:43:20",
+      "location": "2100 block of E Main St",
+      "lat": 35.031,
+      "lng": -85.283,
+      "script": "Chattanooga Police units are on the way to a reported shots fired call at the 2100 block of East Main Street in Chattanooga. The call came in around 11:43 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7173",
+      "type": "Fire",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Tri-Community FD",
+      "event": "Structure Fire",
+      "area": "Collegedale",
+      "created_at": "2026-10-13T11:21:20",
+      "location": "9400 block of Apison Pike",
+      "lat": 35.045,
+      "lng": -85.055,
+      "script": "A structure fire was reported at the 9400 block of Apison Pike in Collegedale. The call came in around 11:21 AM. Units are being assigned.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7878",
+      "type": "Fire",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga FD",
+      "event": "Fire Alarm",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T11:19:20",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Fire units are on scene of a reported fire alarm at the 3000 block of Broad Street in Chattanooga. The call came in around 11:19 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9785",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Signal Mountain PD",
+      "event": "Burglary",
+      "area": "Signal Mountain",
+      "created_at": "2026-10-13T10:29:20",
+      "location": "1200 block of Taft Hwy",
+      "lat": 35.122,
+      "lng": -85.343,
+      "script": "Signal Mountain Police units are on the way to a reported burglary at the 1200 block of Taft Highway in Signal Mountain. The call came in around 10:29 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-2078",
+      "type": "Fire",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Red Bank FD",
+      "event": "Brush Fire",
+      "area": "Red Bank",
+      "created_at": "2026-10-13T10:20:20",
+      "location": "1800 block of Dayton Blvd",
+      "lat": 35.087,
+      "lng": -85.296,
+      "script": "Red Bank Fire units are on the way to a reported brush fire at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 10:20 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-4296",
+      "type": "Fire",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga FD",
+      "event": "Vehicle Fire",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T10:19:20",
+      "location": "2000 block of Gunbarrel Rd",
+      "lat": 35.042,
+      "lng": -85.156,
+      "script": "Chattanooga Fire units are on scene of a reported vehicle fire at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 10:19 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9338",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Soddy-Daisy PD",
+      "event": "Burglary",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T10:04:20",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Soddy-Daisy Police units are on scene of a reported burglary at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 10:04 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9948",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Collegedale PD",
+      "event": "Shots Fired Call",
+      "area": "Collegedale",
+      "created_at": "2026-10-13T09:49:20",
+      "location": "9400 block of Apison Pike",
+      "lat": 35.045,
+      "lng": -85.055,
+      "script": "Collegedale Police units are on the way to a reported shots fired call at the 9400 block of Apison Pike in Collegedale. The call came in around 9:49 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-2503",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Chattanooga PD",
+      "event": "Theft From Vehicle",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T09:34:20",
+      "location": "1400 block of Mccallie Ave",
+      "lat": 35.043,
+      "lng": -85.279,
+      "script": "A theft from vehicle was reported at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 9:34 AM. Units are being assigned.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9867",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "East Ridge PD",
+      "event": "Stolen Vehicle",
+      "area": "East Ridge",
+      "created_at": "2026-10-13T09:00:20",
+      "location": "3700 block of Ringgold Rd",
+      "lat": 35.001,
+      "lng": -85.239,
+      "script": "East Ridge Police units are on the way to a reported stolen vehicle at the 3700 block of Ringgold Road in East Ridge. The call came in around 9:00 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-4788",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Red Bank PD",
+      "event": "Shots Fired Call",
+      "area": "Red Bank",
+      "created_at": "2026-10-13T08:46:20",
+      "location": "1800 block of Dayton Blvd",
+      "lat": 35.087,
+      "lng": -85.296,
+      "script": "Red Bank Police units are on scene of a reported shots fired call at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 8:46 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7218",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Red Bank PD",
+      "event": "Shots Fired Call",
+      "area": "Red Bank",
+      "created_at": "2026-10-13T08:43:20",
+      "location": "1800 block of Dayton Blvd",
+      "lat": 35.087,
+      "lng": -85.296,
+      "script": "A shots fired call was reported at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 8:43 AM. Units are being assigned.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7438",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Stolen Vehicle",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T08:28:20",
+      "location": "5400 block of Brainerd Rd",
+      "lat": 35.012,
+      "lng": -85.205,
+      "script": "Chattanooga Police units are on scene of a reported stolen vehicle at the 5400 block of Brainerd Road in Chattanooga. The call came in around 8:28 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9207",
+      "type": "Fire",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga FD",
+      "event": "Brush Fire",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T08:22:20",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Fire units are on scene of a reported brush fire at the 3000 block of Broad Street in Chattanooga. The call came in around 8:22 AM.",
+      "first_seen": "2026-10-13T12:06:20",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T12:06:20"
+        }
+      ],
+      "cleared_at": null
+    }
+  ]
+}

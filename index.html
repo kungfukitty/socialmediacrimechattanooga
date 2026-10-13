@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chattanooga 911 Feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Leaflet 1.9.4 core styles (inlined; image rules removed because the feed draws its own pins) */
+ .leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; }
+.leaflet-container { overflow: hidden; }
+.leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; }
+.leaflet-tile::selection { background: transparent; }
+.leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; }
+.leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; }
+.leaflet-marker-icon, .leaflet-marker-shadow { display: block; }
+.leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; }
+.leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; }
+.leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; }
+.leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }
+.leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; }
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; }
+.leaflet-container { -webkit-tap-highlight-color: transparent; }
+.leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); }
+.leaflet-tile { filter: inherit; visibility: hidden; }
+.leaflet-tile-loaded { visibility: inherit; }
+.leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; }
+.leaflet-overlay-pane svg { -moz-user-select: none; }
+.leaflet-pane { z-index: 400; }
+.leaflet-tile-pane { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane { z-index: 500; }
+.leaflet-marker-pane { z-index: 600; }
+.leaflet-tooltip-pane { z-index: 650; }
+.leaflet-popup-pane { z-index: 700; }
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg { z-index: 200; }
+.leaflet-vml-shape { width: 1px; height: 1px; }
+.leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; }
+.leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; }
+.leaflet-top { top: 0; }
+.leaflet-right { right: 0; }
+.leaflet-bottom { bottom: 0; }
+.leaflet-left { left: 0; }
+.leaflet-control { float: left; clear: both; }
+.leaflet-right .leaflet-control { float: right; }
+.leaflet-top .leaflet-control { margin-top: 10px; }
+.leaflet-bottom .leaflet-control { margin-bottom: 10px; }
+.leaflet-left .leaflet-control { margin-left: 10px; }
+.leaflet-right .leaflet-control { margin-right: 10px; }
+.leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; }
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; }
+.leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; }
+svg.leaflet-zoom-animated { will-change: transform; }
+.leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); }
+.leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; }
+.leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; }
+.leaflet-interactive { cursor: pointer; }
+.leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; }
+.leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; }
+.leaflet-popup-pane, .leaflet-control { cursor: auto; }
+.leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; }
+.leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; }
+.leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; }
+.leaflet-container { background: #ddd; outline-offset: 1px; }
+.leaflet-container a { color: #0078A8; }
+.leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); }
+.leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; }
+.leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; }
+.leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; }
+.leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; }
+.leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; }
+.leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; }
+.leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; }
+.leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; }
+.leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; }
+.leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; }
+.leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; }
+.leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; }
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; }
+.leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; }
+.leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; }
+.leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; }
+.leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; }
+.leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; }
+.leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; }
+.leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; }
+.leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; }
+.leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; }
+.leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; }
+.leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; }
+.leaflet-control-attribution a { text-decoration: none; }
+.leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; }
+.leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; }
+.leaflet-left .leaflet-control-scale { margin-left: 5px; }
+.leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; }
+.leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; }
+.leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; }
+.leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; }
+.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; }
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; }
+.leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; }
+.leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; }
+.leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; }
+.leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; }
+.leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; }
+.leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); }
+.leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; }
+.leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; }
+.leaflet-popup-scrolled { overflow: auto; }
+.leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; }
+.leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); }
+.leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; }
+.leaflet-div-icon { background: #fff; border: 1px solid #666; }
+.leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+.leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; }
+.leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; }
+.leaflet-tooltip-bottom { margin-top: 6px; }
+.leaflet-tooltip-top { margin-top: -6px; }
+.leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; }
+.leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; }
+.leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; }
+.leaflet-tooltip-left { margin-left: -6px; }
+.leaflet-tooltip-right { margin-left: 6px; }
+.leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; }
+.leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; }
+.leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; }
+@media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+</style>
+<style>
+/* Layout: one 9:16 "phone" stage. A single dark map sits behind a scroll-snap stack of
+   transparent incident cards; the map flies to whichever card is on screen. Dark-only by design
+   (night dispatch board), so every color is set explicitly. */
+:root {
+  --night: #0a0e13;          /* page + map ground */
+  --panel: rgba(10, 14, 19, .78);
+  --ink: #f1f3f5;            /* primary text */
+  --dim: #9aa6b2;            /* secondary text, blue-grey toward the map */
+  --line: rgba(241, 243, 245, .14);
+  --law: #4f8cff;            /* police blue */
+  --fire: #ff6b2c;           /* engine orange */
+  --road: #ffc21a;           /* road-sign amber */
+  --live: #ff3b4e;           /* LIVE dot */
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--night); color: var(--ink); font: 15px/1.45 var(--body); overflow: hidden; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, .tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.stage { position: relative; height: 100%; width: min(100%, calc(100dvh * 9 / 16)); margin: 0 auto; overflow: hidden; background: var(--night); }
+@media (min-width: 700px) { .stage { box-shadow: 0 0 0 1px var(--line); } }
+
+/* Map ground: a dispatch-grid shows through until (or if) tiles load */
+#map { position: absolute; inset: 0; z-index: 0; background-color: var(--night);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px; }
+#map .leaflet-tile-pane { filter: saturate(.6) brightness(.9); }
+.leaflet-control-attribution { background: rgba(10,14,19,.7) !important; color: var(--dim) !important; font: 10px var(--body) !important; }
+.leaflet-control-attribution a { color: var(--ink) !important; }
+.shade { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,14,19,.75) 0%, rgba(10,14,19,0) 18%, rgba(10,14,19,0) 40%, rgba(10,14,19,.92) 72%, var(--night) 100%); }
+
+/* Pins */
+.pin { --c: var(--law); width: 14px; height: 14px; border-radius: 50%; background: var(--c); border: 2px solid var(--night); box-shadow: 0 0 0 1px var(--c); opacity: .55; transition: transform .3s, opacity .3s; }
+.pin.Fire { --c: var(--fire); } .pin.Road { --c: var(--road); }
+.pin.on { opacity: 1; transform: scale(1.5); }
+.pin.on::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--c); animation: ping 1.6s ease-out infinite; }
+@keyframes ping { from { transform: scale(1); opacity: .9; } to { transform: scale(4); opacity: 0; } }
+
+/* Top bar */
+.top { position: absolute; z-index: 5; left: 0; right: 0; top: 0; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 0; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+.brand { display: flex; align-items: center; gap: 10px; font: 800 20px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; }
+.brand small { font: 500 11px/1 var(--mono); color: var(--dim); letter-spacing: .06em; }
+.live { display: inline-flex; align-items: center; gap: 6px; font: 600 11px/1 var(--body); letter-spacing: .12em; background: var(--live); color: #fff; padding: 4px 7px; border-radius: 3px; }
+.live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: blink 1.2s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+.tabs { display: flex; gap: 6px; pointer-events: auto; overflow-x: auto; scrollbar-width: none; }
+.tab { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--dim); white-space: nowrap; }
+.tab[aria-pressed="true"] { color: var(--night); background: var(--ink); border-color: var(--ink); }
+
+/* Feed */
+.feed { position: absolute; inset: 0; z-index: 2; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+.feed::-webkit-scrollbar { display: none; }
+.card { position: relative; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 76px calc(env(safe-area-inset-bottom, 0px) + 58px) 16px; }
+.card > * { min-width: 0; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
+.kind { --c: var(--law); font: 800 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--night); background: var(--c); padding: 5px 8px 4px; border-radius: 2px; }
+.kind.Fire { --c: var(--fire); } .kind.Road { --c: var(--road); }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink); border: 1px solid var(--line); background: var(--panel); padding: 3px 8px; border-radius: 2px; }
+.status b { font: 500 11px/1 var(--mono); color: var(--dim); }
+.ago { font-size: 12px; color: var(--dim); }
+.new { font: 800 12px/1 var(--display); letter-spacing: .1em; color: var(--live); }
+.event { margin: 0; font: 800 clamp(34px, 10.5vw, 52px)/.92 var(--display); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; overflow-wrap: anywhere; }
+.where { margin: 8px 0 0; font-size: 17px; font-weight: 600; }
+.where span { color: var(--dim); font-weight: 400; }
+.cad { margin: 6px 0 0; font: 500 11.5px/1.4 var(--mono); color: var(--dim); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.vo { margin: 14px 0 0; padding: 10px 12px; background: var(--panel); border-left: 3px solid var(--ink); font-size: 15px; line-height: 1.5; color: var(--dim); max-width: 60ch; }
+.vo .w.on { color: var(--ink); background: rgba(241,243,245,.12); border-radius: 2px; }
+.vo .w.done { color: var(--ink); }
+.bar { position: absolute; left: 16px; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 44px); height: 2px; background: var(--line); }
+.bar i { display: block; height: 100%; width: 0; background: var(--ink); }
+
+/* Right rail */
+.rail { position: absolute; z-index: 6; right: 10px; bottom: calc(env(safe-area-inset-bottom, 0px) + 150px); display: flex; flex-direction: column; gap: 14px; }
+.rb { width: 52px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: 0; padding: 0; font-size: 11px; color: var(--ink); text-shadow: 0 1px 2px #000; }
+.rb svg { width: 44px; height: 44px; padding: 10px; border-radius: 50%; background: var(--panel); border: 1px solid var(--line); fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rb[aria-pressed="true"] svg { background: var(--ink); stroke: var(--night); }
+
+/* Disclaimer + toast + start */
+.disc { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; padding: 8px 16px calc(env(safe-area-inset-bottom, 0px) + 10px); font-size: 11px; line-height: 1.35; color: var(--dim); background: var(--night); border-top: 1px solid var(--line); pointer-events: none; }
+.toast { position: absolute; z-index: 9; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 92px); transform: translate(-50%, -8px); opacity: 0; transition: .25s; background: var(--ink); color: var(--night); font-weight: 600; font-size: 13px; padding: 8px 14px; border-radius: 999px; pointer-events: none; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.start { position: absolute; z-index: 8; left: 16px; right: 16px; top: calc(env(safe-area-inset-top, 0px) + 150px); display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; }
+.start button { pointer-events: auto; display: inline-flex; align-items: center; gap: 10px; border: 0; background: var(--ink); color: var(--night); font: 800 18px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; padding: 14px 20px; border-radius: 999px; box-shadow: 0 6px 24px rgba(0,0,0,.5); }
+.start button svg { width: 20px; height: 20px; fill: var(--night); }
+.start p { margin: 0; font-size: 12px; color: var(--ink); text-shadow: 0 1px 3px #000; }
+.empty { height: 100%; display: grid; place-items: center; text-align: center; padding: 0 32px; color: var(--dim); }
+
+/* Clean mode: hides controls so the screen can be recorded as a Short */
+.clean .tabs, .clean .rail, .clean .start, .clean .leaflet-control-zoom { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pin.on::after, .live::before { animation: none; }
+  .feed { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+  <div id="map" aria-hidden="true"></div>
+  <div class="shade"></div>
+
+  <header class="top">
+    <div class="brand">CHA 911 <span class="live">LIVE</span> <small id="count">loading…</small></div>
+    <nav class="tabs" aria-label="Filter incidents">
+      <button class="tab" data-f="all" aria-pressed="true">All</button>
+      <button class="tab" data-f="Law" aria-pressed="false">Police</button>
+      <button class="tab" data-f="Fire" aria-pressed="false">Fire</button>
+      <button class="tab" data-f="Road Closure" aria-pressed="false">Roads</button>
+    </nav>
+  </header>
+
+  <section class="feed" id="feed" aria-label="Incident feed" tabindex="0"></section>
+
+  <div class="rail">
+    <button class="rb" id="bSound" aria-pressed="false" title="Voiceover on/off (M)">
+      <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path id="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span>Voice</span>
+    </button>
+    <button class="rb" id="bAuto" aria-pressed="true" title="Auto-advance (A)">
+      <svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg><span>Auto</span>
+    </button>
+    <button class="rb" id="bCopy" title="Copy post caption">
+      <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Caption</span>
+    </button>
+    <button class="rb" id="bClean" title="Clean mode for screen recording (C)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg><span>Record</span>
+    </button>
+  </div>
+
+  <div class="start" id="start">
+    <button id="bStart"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/></svg>Tap for voiceover</button>
+    <p>Swipe up for the next call</p>
+  </div>
+
+  <p class="disc" id="disc">Based on public 9-1-1 dispatch data. Not an official statement. Details may change.</p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</main>
+
+<script id="seed" type="application/json">{"generated_at":"2026-10-13T12:06:20","source":"https://www.hamiltontn911.gov/active-incidents.php","simulated":true,"disclaimer":"Based on public 9-1-1 dispatch data. Not an official statement. Details may change.","incidents":[{"id":"SIM-261013-2938","type":"Road Closure","status":"OS","status_label":"On Scene","agency":"Chattanooga PD","event":"Road Closure - Crash","area":"Chattanooga","created_at":"2026-10-13T11:59:20","location":"400 block of Market St","lat":35.051,"lng":-85.31,"script":"Heads up. A road closure was reported at the 400 block of Market Street in Chattanooga. The call came in around 11:59 AM. Expect delays and use another route.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9360","type":"Law","status":"E","status_label":"Enroute","agency":"Chattanooga PD","event":"Shots Fired Call","area":"Chattanooga","created_at":"2026-10-13T11:43:20","location":"2100 block of E Main St","lat":35.031,"lng":-85.283,"script":"Chattanooga Police units are on the way to a reported shots fired call at the 2100 block of East Main Street in Chattanooga. The call came in around 11:43 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"E","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-7173","type":"Fire","status":"R","status_label":"Reported","agency":"Tri-Community FD","event":"Structure Fire","area":"Collegedale","created_at":"2026-10-13T11:21:20","location":"9400 block of Apison Pike","lat":35.045,"lng":-85.055,"script":"A structure fire was reported at the 9400 block of Apison Pike in Collegedale. The call came in around 11:21 AM. Units are being assigned.","first_seen":"2026-10-13T12:06:20","history":[{"status":"R","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-7878","type":"Fire","status":"OS","status_label":"On Scene","agency":"Chattanooga FD","event":"Fire Alarm","area":"Chattanooga","created_at":"2026-10-13T11:19:20","location":"3000 block of Broad St","lat":35.028,"lng":-85.317,"script":"Chattanooga Fire units are on scene of a reported fire alarm at the 3000 block of Broad Street in Chattanooga. The call came in around 11:19 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9785","type":"Law","status":"E","status_label":"Enroute","agency":"Signal Mountain PD","event":"Burglary","area":"Signal Mountain","created_at":"2026-10-13T10:29:20","location":"1200 block of Taft Hwy","lat":35.122,"lng":-85.343,"script":"Signal Mountain Police units are on the way to a reported burglary at the 1200 block of Taft Highway in Signal Mountain. The call came in around 10:29 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"E","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-2078","type":"Fire","status":"E","status_label":"Enroute","agency":"Red Bank FD","event":"Brush Fire","area":"Red Bank","created_at":"2026-10-13T10:20:20","location":"1800 block of Dayton Blvd","lat":35.087,"lng":-85.296,"script":"Red Bank Fire units are on the way to a reported brush fire at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 10:20 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"E","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-4296","type":"Fire","status":"OS","status_label":"On Scene","agency":"Chattanooga FD","event":"Vehicle Fire","area":"Chattanooga","created_at":"2026-10-13T10:19:20","location":"2000 block of Gunbarrel Rd","lat":35.042,"lng":-85.156,"script":"Chattanooga Fire units are on scene of a reported vehicle fire at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 10:19 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9338","type":"Law","status":"OS","status_label":"On Scene","agency":"Soddy-Daisy PD","event":"Burglary","area":"Soddy-Daisy","created_at":"2026-10-13T10:04:20","location":"11000 block of Dayton Pike","lat":35.235,"lng":-85.19,"script":"Soddy-Daisy Police units are on scene of a reported burglary at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 10:04 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9948","type":"Law","status":"E","status_label":"Enroute","agency":"Collegedale PD","event":"Shots Fired Call","area":"Collegedale","created_at":"2026-10-13T09:49:20","location":"9400 block of Apison Pike","lat":35.045,"lng":-85.055,"script":"Collegedale Police units are on the way to a reported shots fired call at the 9400 block of Apison Pike in Collegedale. The call came in around 9:49 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"E","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-2503","type":"Law","status":"R","status_label":"Reported","agency":"Chattanooga PD","event":"Theft From Vehicle","area":"Chattanooga","created_at":"2026-10-13T09:34:20","location":"1400 block of Mccallie Ave","lat":35.043,"lng":-85.279,"script":"A theft from vehicle was reported at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 9:34 AM. Units are being assigned.","first_seen":"2026-10-13T12:06:20","history":[{"status":"R","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9867","type":"Law","status":"E","status_label":"Enroute","agency":"East Ridge PD","event":"Stolen Vehicle","area":"East Ridge","created_at":"2026-10-13T09:00:20","location":"3700 block of Ringgold Rd","lat":35.001,"lng":-85.239,"script":"East Ridge Police units are on the way to a reported stolen vehicle at the 3700 block of Ringgold Road in East Ridge. The call came in around 9:00 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"E","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-4788","type":"Law","status":"OS","status_label":"On Scene","agency":"Red Bank PD","event":"Shots Fired Call","area":"Red Bank","created_at":"2026-10-13T08:46:20","location":"1800 block of Dayton Blvd","lat":35.087,"lng":-85.296,"script":"Red Bank Police units are on scene of a reported shots fired call at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 8:46 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-7218","type":"Law","status":"R","status_label":"Reported","agency":"Red Bank PD","event":"Shots Fired Call","area":"Red Bank","created_at":"2026-10-13T08:43:20","location":"1800 block of Dayton Blvd","lat":35.087,"lng":-85.296,"script":"A shots fired call was reported at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 8:43 AM. Units are being assigned.","first_seen":"2026-10-13T12:06:20","history":[{"status":"R","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-7438","type":"Law","status":"OS","status_label":"On Scene","agency":"Chattanooga PD","event":"Stolen Vehicle","area":"Chattanooga","created_at":"2026-10-13T08:28:20","location":"5400 block of Brainerd Rd","lat":35.012,"lng":-85.205,"script":"Chattanooga Police units are on scene of a reported stolen vehicle at the 5400 block of Brainerd Road in Chattanooga. The call came in around 8:28 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null},{"id":"SIM-261013-9207","type":"Fire","status":"OS","status_label":"On Scene","agency":"Chattanooga FD","event":"Brush Fire","area":"Chattanooga","created_at":"2026-10-13T08:22:20","location":"3000 block of Broad St","lat":35.028,"lng":-85.317,"script":"Chattanooga Fire units are on scene of a reported brush fire at the 3000 block of Broad Street in Chattanooga. The call came in around 8:22 AM.","first_seen":"2026-10-13T12:06:20","history":[{"status":"OS","at":"2026-10-13T12:06:20"}],"cleared_at":null}]}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(() => {
+  "use strict";
+  const $ = (s) => document.querySelector(s);
+  const feedEl = $("#feed"), stage = $("#stage");
+  const CENTER = [35.06, -85.25];               // Hamilton County
+  const SOURCE = "incidents.json";               // written by scraper.py
+  const REFRESH_MS = 60_000;                     // re-read the file this often
+  const SIM_EVERY_MS = 25_000;                   // demo: a new simulated call this often
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const state = { all: [], list: [], filter: "all", active: -1, sound: false, auto: true, simulated: false, timer: null, seen: new Set() };
+  const kindClass = (t) => (t === "Fire" ? "Fire" : t === "Road Closure" ? "Road" : "Law");
+  const kindLabel = (t) => (t === "Road Closure" ? "Road" : t === "Law" ? "Police" : t);
+
+  /* ---------- map ---------- */
+  let map = null, markers = new Map();
+  if (window.L) {
+    map = L.map("map", { zoomControl: false, attributionControl: true, center: CENTER, zoom: 11, keyboard: false, scrollWheelZoom: false, dragging: false, doubleClickZoom: false, touchZoom: false });
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      maxZoom: 19, subdomains: "abcd",
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    }).addTo(map);
+  }
+  function syncMarkers() {
+    if (!map) return;
+    const ids = new Set(state.list.map((i) => i.id));
+    for (const [id, m] of markers) if (!ids.has(id)) { m.remove(); markers.delete(id); }
+    for (const inc of state.list) {
+      if (inc.lat == null || markers.has(inc.id)) continue;
+      const icon = L.divIcon({ className: "", html: `<div class="pin ${kindClass(inc.type)}"></div>`, iconSize: [14, 14], iconAnchor: [7, 7] });
+      markers.set(inc.id, L.marker([inc.lat, inc.lng], { icon, interactive: false }).addTo(map));
+    }
+  }
+  function focusMap(inc) {
+    if (!map) return;
+    for (const [id, m] of markers) m.getElement()?.firstChild?.classList.toggle("on", id === inc.id);
+    if (inc.lat == null) { map.setView(CENTER, 11); return; }
+    const zoom = 15;
+    // keep the pin in the upper part of the frame, above the text card
+    const p = map.project([inc.lat, inc.lng], zoom).add([0, map.getSize().y * 0.2]);
+    const target = map.unproject(p, zoom);
+    reduceMotion ? map.setView(target, zoom) : map.flyTo(target, zoom, { duration: 1.4 });
+  }
+
+  /* ---------- formatting ---------- */
+  const fmtClock = (iso) => iso ? new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }) : "";
+  function ago(iso) {
+    if (!iso) return "";
+    const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+    return m < 1 ? "just now" : m < 60 ? `${m} min ago` : `${Math.floor(m / 60)} hr ${m % 60} min ago`;
+  }
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function caption(inc) {
+    const area = inc.area && inc.area !== "Hamilton County" ? inc.area : "Hamilton County";
+    const tag = area.replace(/[^A-Za-z]/g, "");
+    return `${inc.event} reported: ${inc.location}, ${area} (${fmtClock(inc.created_at)}). ${inc.status_label}.\n` +
+      `Based on public 9-1-1 dispatch data. Not an official statement. Details may change.\n` +
+      `#Chattanooga #${tag} #HamiltonCounty #ChattanoogaNews #LocalNews`;
+  }
+
+  /* ---------- render ---------- */
+  function cardHTML(inc, i) {
+    const words = (inc.script || "").split(/\s+/).filter(Boolean).map((w, k) => `<span class="w" data-k="${k}">${esc(w)}</span>`).join(" ");
+    const area = inc.area && inc.area !== "Hamilton County" ? inc.area : "Hamilton County";
+    return `<article class="card" data-i="${i}" aria-label="${esc(inc.event)}, ${esc(inc.location)}">
+      <div class="meta">
+        <span class="kind ${kindClass(inc.type)}">${esc(kindLabel(inc.type))}</span>
+        <span class="status"><b>${esc(inc.status)}</b>${esc(inc.status_label)}</span>
+        <span class="ago" data-ago="${esc(inc.created_at)}">${ago(inc.created_at)}</span>
+        ${inc._new ? '<span class="new">NEW</span>' : ""}
+      </div>
+      <h2 class="event">${esc(inc.event)}</h2>
+      <p class="where">${esc(inc.location)} <span>· ${esc(area)}</span></p>
+      <p class="cad">${esc(inc.agency)} · #${esc(inc.id)} · dispatched ${esc(fmtClock(inc.created_at))}</p>
+      <p class="vo">${words}</p>
+      <div class="bar"><i></i></div>
+    </article>`;
+  }
+  function render(keepId) {
+    state.list = state.all.filter((i) => state.filter === "all" || i.type === state.filter);
+    $("#count").textContent = `${state.list.length} active call${state.list.length === 1 ? "" : "s"}${state.simulated ? " · demo data" : ""}`;
+    if (!state.list.length) {
+      feedEl.innerHTML = `<div class="empty"><p>No calls in this category right now.<br>New calls appear here as the 911 list updates.</p></div>`;
+      state.active = -1; return;
+    }
+    feedEl.innerHTML = state.list.map(cardHTML).join("");
+    syncMarkers();
+    const idx = Math.max(0, state.list.findIndex((i) => i.id === keepId));
+    feedEl.scrollTop = idx * feedEl.clientHeight;
+    state.active = -1;
+    activate(idx);
+  }
+
+  /* ---------- playback: voiceover + word captions + auto-advance ---------- */
+  let voice = null;
+  function pickVoice() {
+    const vs = speechSynthesis?.getVoices?.() || [];
+    voice = vs.find((v) => /en-US/i.test(v.lang) && /natural|neural|google|samantha|aria|jenny/i.test(v.name)) || vs.find((v) => /en-US/i.test(v.lang)) || vs[0] || null;
+  }
+  if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+  function stopPlayback() {
+    clearInterval(state.timer); state.timer = null;
+    if ("speechSynthesis" in window) speechSynthesis.cancel();
+  }
+  function activate(i) {
+    if (i === state.active || !state.list[i]) return;
+    state.active = i;
+    const inc = state.list[i];
+    focusMap(inc);
+    play(i);
+  }
+  function play(i) {
+    stopPlayback();
+    const card = feedEl.querySelector(`.card[data-i="${i}"]`); if (!card) return;
+    const words = [...card.querySelectorAll(".w")], bar = card.querySelector(".bar i");
+    words.forEach((w) => w.classList.remove("on", "done"));
+    const mark = (k) => { words.forEach((w, j) => { w.classList.toggle("done", j < k); w.classList.toggle("on", j === k); }); bar.style.width = `${Math.min(100, ((k + 1) / words.length) * 100)}%`; };
+    const finish = () => { mark(words.length); bar.style.width = "100%"; if (state.auto) setTimeout(() => { if (state.active === i) next(); }, 1400); };
+    const startAt = Date.now(), wps = 2.7;   // words per second for the silent caption timer
+
+    if (state.sound && "speechSynthesis" in window) {
+      const u = new SpeechSynthesisUtterance(state.list[i].script);
+      if (voice) u.voice = voice;
+      u.rate = 1.02;
+      let gotBoundary = false;
+      // word index from character offset
+      const starts = []; let pos = 0; for (const w of state.list[i].script.split(/\s+/).filter(Boolean)) { pos = state.list[i].script.indexOf(w, pos); starts.push(pos); pos += w.length; }
+      u.onboundary = (e) => { if (e.name && e.name !== "word") return; gotBoundary = true; let k = 0; while (k + 1 < starts.length && starts[k + 1] <= e.charIndex) k++; mark(k); };
+      u.onend = () => { clearInterval(state.timer); if (state.active === i) finish(); };
+      // fallback caption timer when the voice doesn't report word boundaries
+      state.timer = setInterval(() => { if (!gotBoundary) mark(Math.min(words.length - 1, Math.floor(((Date.now() - startAt) / 1000) * wps))); }, 120);
+      speechSynthesis.speak(u);
+    } else {
+      state.timer = setInterval(() => {
+        const k = Math.floor(((Date.now() - startAt) / 1000) * wps);
+        if (k >= words.length) { clearInterval(state.timer); finish(); } else mark(k);
+      }, 120);
+    }
+  }
+  function go(i) { feedEl.scrollTo({ top: i * feedEl.clientHeight, behavior: reduceMotion ? "auto" : "smooth" }); }
+  function next() { if (state.active < state.list.length - 1) go(state.active + 1); else go(0); }
+
+  // which card is on screen
+  let scrollT;
+  feedEl.addEventListener("scroll", () => {
+    clearTimeout(scrollT);
+    scrollT = setTimeout(() => activate(Math.round(feedEl.scrollTop / feedEl.clientHeight)), 90);
+  }, { passive: true });
+
+  /* ---------- controls ---------- */
+  const toastEl = $("#toast"); let toastT;
+  function toast(msg) { toastEl.textContent = msg; toastEl.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 2200); }
+  function setSound(on) {
+    state.sound = on && "speechSynthesis" in window;
+    $("#bSound").setAttribute("aria-pressed", String(state.sound));
+    $("#start").hidden = true;
+    if (on && !("speechSynthesis" in window)) toast("This browser has no built-in voice");
+    play(state.active);
+  }
+  $("#bStart").addEventListener("click", () => setSound(true));
+  $("#bSound").addEventListener("click", () => setSound(!state.sound));
+  $("#bAuto").addEventListener("click", (e) => { state.auto = !state.auto; e.currentTarget.setAttribute("aria-pressed", String(state.auto)); toast(state.auto ? "Auto-advance on" : "Auto-advance off"); });
+  $("#bClean").addEventListener("click", () => { stage.classList.add("clean"); toast("Record mode · press C or tap the top bar to exit"); });
+  $(".top").addEventListener("click", () => stage.classList.remove("clean"));
+  $("#bCopy").addEventListener("click", async () => {
+    const text = caption(state.list[state.active] || {});
+    try { await navigator.clipboard.writeText(text); toast("Caption copied"); }
+    catch { const t = document.createElement("textarea"); t.value = text; document.body.append(t); t.select(); try { document.execCommand("copy"); toast("Caption copied"); } catch { toast("Copy blocked by the browser"); } t.remove(); }
+  });
+  document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    state.filter = b.dataset.f; stopPlayback(); render();
+  }));
+  addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown" || e.key === "j") { e.preventDefault(); next(); }
+    else if (e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); go(Math.max(0, state.active - 1)); }
+    else if (e.key === "m") setSound(!state.sound);
+    else if (e.key === "a") $("#bAuto").click();
+    else if (e.key === "c") stage.classList.toggle("clean");
+  });
+  addEventListener("resize", () => { if (state.active >= 0) feedEl.scrollTop = state.active * feedEl.clientHeight; });
+  setInterval(() => document.querySelectorAll("[data-ago]").forEach((el) => (el.textContent = ago(el.dataset.ago))), 30_000);
+
+  /* ---------- data ---------- */
+  function load(doc, announce) {
+    state.simulated = !!doc.simulated;
+    if (doc.disclaimer) $("#disc").textContent = doc.disclaimer;
+    const incs = (doc.incidents || []).filter((i) => !i.cleared_at);
+    const fresh = incs.filter((i) => !state.seen.has(i.id));
+    incs.forEach((i) => state.seen.add(i.id));
+    const keep = state.list[state.active]?.id;
+    state.all = incs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    render(keep);
+    if (announce && fresh.length) toast(`${fresh.length} new call${fresh.length > 1 ? "s" : ""} · swipe to top`);
+  }
+  async function fetchFeed(announce) {
+    try {
+      const r = await fetch(`${SOURCE}?t=${Date.now()}`, { cache: "no-store" });
+      if (!r.ok) throw new Error(r.status);
+      load(await r.json(), announce);
+      return true;
+    } catch { return false; }
+  }
+
+  // Demo: invent a new call now and then so the feed shows how live updates arrive
+  const SIM = [
+    ["Law", "Theft From Vehicle", "2300 block of Hamilton Place Blvd", "Chattanooga", 35.039, -85.155, "Chattanooga PD"],
+    ["Fire", "Vehicle Fire", "I-24 & Germantown Rd", "Chattanooga", 35.017, -85.249, "Chattanooga FD"],
+    ["Road Closure", "Road Closure - Crash", "Hwy 153 & Hixson Pike", "Chattanooga", 35.104, -85.238, "Chattanooga PD"],
+    ["Law", "Suspicious Person", "900 block of Ashland Ter", "Red Bank", 35.104, -85.282, "Red Bank PD"],
+    ["Law", "Burglary", "4800 block of Ringgold Rd", "East Ridge", 34.996, -85.214, "East Ridge PD"],
+    ["Fire", "Structure Fire", "1500 block of N Moore Rd", "Chattanooga", 35.019, -85.207, "Chattanooga FD"],
+  ];
+  function simulateArrival() {
+    const [type, event, location, area, lat, lng, agency] = SIM[Math.floor(Math.random() * SIM.length)];
+    const now = new Date();
+    const status = type === "Road Closure" ? "OS" : "E";
+    const where = location.includes(" block of ") ? `the ${location}` : location.replace(" & ", " and ");
+    const spoken = where.replace(/\bBlvd\b/, "Boulevard").replace(/\bRd\b/, "Road").replace(/\bTer\b/, "Terrace").replace(/\bN\b/, "North").replace(/\bHwy\b/, "Highway");
+    const agencySpoken = agency.replace(/\bPD\b/, "Police").replace(/\bFD\b/, "Fire");
+    const t = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+    const script = type === "Road Closure"
+      ? `Heads up. A road closure was reported at ${spoken} in ${area}. The call came in around ${t}. Expect delays and use another route.`
+      : `${agencySpoken} units are on the way to a reported ${event.toLowerCase()} at ${spoken} in ${area}. The call came in around ${t}.`;
+    const inc = { id: `SIM-${now.getTime().toString().slice(-7)}`, type, status, status_label: status === "E" ? "Enroute" : "On Scene", agency, event, area, location, lat, lng, created_at: now.toISOString(), script, _new: true };
+    state.seen.add(inc.id);
+    const keep = state.list[state.active]?.id;
+    state.all.unshift(inc);
+    render(keep);
+    toast(`New call: ${kindLabel(type)} · ${area}`);
+  }
+
+  (async () => {
+    const ok = await fetchFeed(false);
+    if (!ok) { try { load(JSON.parse($("#seed").textContent), false); } catch { render(); } }
+    if (state.simulated) setInterval(simulateArrival, SIM_EVERY_MS);
+    else setInterval(() => fetchFeed(true), REFRESH_MS);
+  })();
+})();
+</script>
+</body>
+</html>
