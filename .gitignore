@@ -4,3 +4,13 @@
 geocache.json
 last_page.html
 __pycache__/
+*.tmp
+output/
+cache/
+published.json
+autopost_config.json
+# secrets: never commit these
+client_secret.json
+youtube_token.json
+tiktok_app.json
+tiktok_token.json

@@ -15,11 +15,19 @@ python -m http.server 8000          # then open http://localhost:8000
 
 In the feed: tap **Tap for voiceover**, swipe or use the arrow keys, **Caption** copies a ready-to-post caption, **Record** hides the controls for screen recording.
 
+## Auto-post to TikTok and YouTube
+
+`autopost.py` picks newsworthy new calls, renders a vertical MP4 for each (`make_short.py`), uploads it to YouTube (`youtube_upload.py`) and sends it to your TikTok drafts (`tiktok_upload.py`). `published.json` prevents duplicates. Start with **`run_test.bat`** (makes videos, uploads nothing), then follow **[docs/AUTOPOST_SETUP.md](docs/AUTOPOST_SETUP.md)** to connect the accounts.
+
 ## Files
 
 - `index.html`: TikTok-style vertical feed (map, voiceover, captions, auto-advance, record mode)
 - `incidents.json`: the feed's data (currently simulated)
 - `scraper.py`: polling adapter for the 911 list (filters, block-level locations, geocoding, voiceover scripts)
+- `make_short.py`: renders one call as a 1080×1920 MP4 (map, card, captions, voiceover)
+- `autopost.py`: scoring, duplicate protection, daily cap, uploads
+- `youtube_upload.py`, `tiktok_upload.py`: platform uploaders
+- `run_test.bat`, `run_once.bat`, `run_continuous.bat`: double-click runners for Windows
 - `requirements.txt`
 
 ## Docs

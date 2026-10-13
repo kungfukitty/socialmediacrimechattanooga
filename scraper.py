@@ -237,7 +237,8 @@ ABBREV = {
 
 def _title(s: str) -> str:
     """Title-case a street name but keep ordinals lowercase: 23rd, not 23Rd."""
-    return re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), s.title())
+    s = re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), s.title())
+    return re.sub(r"\bMc([a-z])", lambda m: "Mc" + m.group(1).upper(), s)
 
 
 def block_of(location: str) -> tuple[str, str]:
