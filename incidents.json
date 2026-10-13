@@ -1,445 +1,445 @@
 {
-  "generated_at": "2026-10-13T16:48:17",
+  "generated_at": "2026-10-13T16:56:59",
   "source": "https://www.hamiltontn911.gov/active-incidents.php",
   "simulated": true,
   "disclaimer": "Based on public 9-1-1 dispatch data. Not an official statement. Details may change.",
   "incidents": [
     {
-      "id": "SIM-261013-6437",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Traffic Accident w/ Injuries",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T16:29:17",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Chattanooga Police units are on scene of a reported traffic accident w/ injuries at the 2100 block of East Main Street in Chattanooga. The call came in around 4:29 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-9661",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Disorder",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T16:21:17",
-      "location": "1400 block of Mccallie Ave",
-      "lat": 35.043,
-      "lng": -85.279,
-      "script": "Chattanooga Police units are on scene of a reported disorder at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 4:21 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-8949",
-      "type": "Code Red",
-      "status": "CR",
-      "status_label": "",
-      "agency": "",
-      "event": "Police Response",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T16:16:17",
-      "location": "3000 block of Broad St",
-      "lat": 35.028,
-      "lng": -85.317,
-      "script": "Code red. Police Response at the 3000 block of Broad Street in Chattanooga. The call came in around 4:16 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "CR",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-2260",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Shoplifting",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T15:50:17",
-      "location": "400 block of Market St",
-      "lat": 35.051,
-      "lng": -85.31,
-      "script": "Chattanooga Police units are on scene of a reported shoplifting at the 400 block of Market Street in Chattanooga. The call came in around 3:50 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-5163",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Stolen Vehicle",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T15:47:17",
-      "location": "1400 block of Mccallie Ave",
-      "lat": 35.043,
-      "lng": -85.279,
-      "script": "Chattanooga Police units are on scene of a reported stolen vehicle at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 3:47 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-1222",
-      "type": "Fire",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Tri-Community FD",
-      "event": "Brush Fire",
-      "area": "Collegedale",
-      "created_at": "2026-10-13T15:24:17",
-      "location": "9400 block of Apison Pike",
-      "lat": 35.045,
-      "lng": -85.055,
-      "script": "Tri-Community Fire units are on scene of a reported brush fire at the 9400 block of Apison Pike in Collegedale. The call came in around 3:24 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-4509",
-      "type": "Law",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Hamilton County SO",
-      "event": "Suspicious Person",
-      "area": "Hamilton County",
-      "created_at": "2026-10-13T15:23:17",
-      "location": "4500 block of Hixson Pike",
-      "lat": 35.115,
-      "lng": -85.256,
-      "script": "A suspicious person was reported at the 4500 block of Hixson Pike in Hamilton County. The call came in around 3:23 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "R",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-9193",
-      "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga PD",
-      "event": "Disorder",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T15:09:17",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Chattanooga Police units are on the way to a reported disorder at the 2100 block of East Main Street in Chattanooga. The call came in around 3:09 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-3488",
-      "type": "Fire",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Tri-Community FD",
-      "event": "Fire Alarm",
-      "area": "Collegedale",
-      "created_at": "2026-10-13T15:01:17",
-      "location": "9400 block of Apison Pike",
-      "lat": 35.045,
-      "lng": -85.055,
-      "script": "Tri-Community Fire units are on the way to a reported fire alarm at the 9400 block of Apison Pike in Collegedale. The call came in around 3:01 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-1709",
-      "type": "Fire",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga FD",
-      "event": "Brush Fire",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:49:17",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Chattanooga Fire units are on the way to a reported brush fire at the 2100 block of East Main Street in Chattanooga. The call came in around 2:49 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-4977",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Assault",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:41:17",
-      "location": "7000 block of Lee Hwy",
-      "lat": 35.048,
-      "lng": -85.158,
-      "script": "Chattanooga Police units are on scene of a reported assault at the 7000 block of Lee Highway in Chattanooga. The call came in around 2:41 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-1079",
-      "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga PD",
-      "event": "Robbery",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:34:17",
-      "location": "7000 block of Lee Hwy",
-      "lat": 35.048,
-      "lng": -85.158,
-      "script": "Chattanooga Police units are on the way to a reported robbery at the 7000 block of Lee Highway in Chattanooga. The call came in around 2:34 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-4394",
-      "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga PD",
-      "event": "Disorder",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:24:17",
-      "location": "600 block of Signal Mountain Rd",
-      "lat": 35.09,
-      "lng": -85.333,
-      "script": "Chattanooga Police units are on the way to a reported disorder at the 600 block of Signal Mountain Road in Chattanooga. The call came in around 2:24 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-8131",
-      "type": "Fire",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Chattanooga FD",
-      "event": "Structure Fire",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:23:17",
-      "location": "2000 block of Gunbarrel Rd",
-      "lat": 35.042,
-      "lng": -85.156,
-      "script": "A structure fire was reported at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 2:23 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "R",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-2786",
-      "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga PD",
-      "event": "Robbery",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:08:17",
-      "location": "5400 block of Brainerd Rd",
-      "lat": 35.012,
-      "lng": -85.205,
-      "script": "Chattanooga Police units are on the way to a reported robbery at the 5400 block of Brainerd Road in Chattanooga. The call came in around 2:08 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-5465",
-      "type": "Law",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Hamilton County SO",
-      "event": "Stolen Vehicle",
-      "area": "Hamilton County",
-      "created_at": "2026-10-13T14:05:17",
-      "location": "4500 block of Hixson Pike",
-      "lat": 35.115,
-      "lng": -85.256,
-      "script": "A stolen vehicle was reported at the 4500 block of Hixson Pike in Hamilton County. The call came in around 2:05 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "R",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-3770",
-      "type": "Law",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Chattanooga PD",
-      "event": "Assault",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:01:17",
-      "location": "1200 block of Boynton Dr",
-      "lat": 35.072,
-      "lng": -85.301,
-      "script": "A assault was reported at the 1200 block of Boynton Drive in Chattanooga. The call came in around 2:01 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "R",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-9165",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Theft From Vehicle",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T13:29:17",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Chattanooga Police units are on scene of a reported theft from vehicle at the 2100 block of East Main Street in Chattanooga. The call came in around 1:29 PM.",
-      "first_seen": "2026-10-13T16:48:17",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:48:17"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-2981",
+      "id": "SIM-261013-9913",
       "type": "Code Red",
       "status": "CR",
       "status_label": "",
       "agency": "",
       "event": "Medical Response",
       "area": "Chattanooga",
-      "created_at": "2026-10-13T13:26:17",
+      "created_at": "2026-10-13T16:54:59",
       "location": "5400 block of Brainerd Rd",
       "lat": 35.012,
       "lng": -85.205,
-      "script": "Code red. Medical Response at the 5400 block of Brainerd Road in Chattanooga. The call came in around 1:26 PM.",
-      "first_seen": "2026-10-13T16:48:17",
+      "script": "Code red. Medical Response at the 5400 block of Brainerd Road in Chattanooga. The call came in around 4:54 PM.",
+      "first_seen": "2026-10-13T16:56:59",
       "history": [
         {
           "status": "CR",
-          "at": "2026-10-13T16:48:17"
+          "at": "2026-10-13T16:56:59"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-8297",
+      "id": "SIM-261013-4780",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Hamilton County SO",
+      "event": "Assault",
+      "area": "Hamilton County",
+      "created_at": "2026-10-13T16:35:59",
+      "location": "4500 block of Hixson Pike",
+      "lat": 35.115,
+      "lng": -85.256,
+      "script": "Hamilton County Sheriff's Office units are on the way to a reported assault at the 4500 block of Hixson Pike in Hamilton County. The call came in around 4:35 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3066",
+      "type": "Traffic",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Soddy-Daisy PD",
+      "event": "Traffic Accident w/ Injuries",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T16:07:59",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Heads up. Soddy-Daisy Police units are on scene of a reported traffic accident with injuries at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 4:07 PM. Expect delays in the area.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-6861",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Assault",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T16:07:59",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Police units are on the way to a reported assault at the 3000 block of Broad Street in Chattanooga. The call came in around 4:07 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-6747",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Disorder",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:58:59",
+      "location": "7000 block of Lee Hwy",
+      "lat": 35.048,
+      "lng": -85.158,
+      "script": "Chattanooga Police units are on scene of a reported disorder at the 7000 block of Lee Highway in Chattanooga. The call came in around 3:58 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-4182",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Signal Mountain PD",
+      "event": "Stolen Vehicle",
+      "area": "Signal Mountain",
+      "created_at": "2026-10-13T15:54:59",
+      "location": "1200 block of Taft Hwy",
+      "lat": 35.122,
+      "lng": -85.343,
+      "script": "A stolen vehicle was reported at the 1200 block of Taft Highway in Signal Mountain. The call came in around 3:54 PM. Units are being assigned.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-8681",
+      "type": "Traffic",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Signal Mountain PD",
+      "event": "Traffic Accident w/ Injuries",
+      "area": "Signal Mountain",
+      "created_at": "2026-10-13T15:30:59",
+      "location": "1200 block of Taft Hwy",
+      "lat": 35.122,
+      "lng": -85.343,
+      "script": "Heads up. Signal Mountain Police units are on the way to a reported traffic accident with injuries at the 1200 block of Taft Highway in Signal Mountain. The call came in around 3:30 PM. Expect delays in the area.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9814",
       "type": "Fire",
       "status": "E",
       "status_label": "Enroute",
       "agency": "Chattanooga FD",
-      "event": "Brush Fire",
+      "event": "Fire Alarm",
       "area": "Chattanooga",
-      "created_at": "2026-10-13T13:11:17",
-      "location": "600 block of Signal Mountain Rd",
-      "lat": 35.09,
-      "lng": -85.333,
-      "script": "Chattanooga Fire units are on the way to a reported brush fire at the 600 block of Signal Mountain Road in Chattanooga. The call came in around 1:11 PM.",
-      "first_seen": "2026-10-13T16:48:17",
+      "created_at": "2026-10-13T15:26:59",
+      "location": "2100 block of E Main St",
+      "lat": 35.031,
+      "lng": -85.283,
+      "script": "Chattanooga Fire units are on the way to a reported fire alarm at the 2100 block of East Main Street in Chattanooga. The call came in around 3:26 PM.",
+      "first_seen": "2026-10-13T16:56:59",
       "history": [
         {
           "status": "E",
-          "at": "2026-10-13T16:48:17"
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3907",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Robbery",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:21:59",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Police units are on the way to a reported robbery at the 3000 block of Broad Street in Chattanooga. The call came in around 3:21 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-6555",
+      "type": "Code Red",
+      "status": "CR",
+      "status_label": "",
+      "agency": "",
+      "event": "Police Response",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:04:59",
+      "location": "1200 block of Boynton Dr",
+      "lat": 35.072,
+      "lng": -85.301,
+      "script": "Code red. Police Response at the 1200 block of Boynton Drive in Chattanooga. The call came in around 3:04 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "CR",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3106",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Chattanooga PD",
+      "event": "Disorder",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T14:55:59",
+      "location": "1400 block of Mccallie Ave",
+      "lat": 35.043,
+      "lng": -85.279,
+      "script": "A disorder was reported at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 2:55 PM. Units are being assigned.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3846",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Theft From Vehicle",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T14:49:59",
+      "location": "400 block of Market St",
+      "lat": 35.051,
+      "lng": -85.31,
+      "script": "Chattanooga Police units are on the way to a reported theft from vehicle at the 400 block of Market Street in Chattanooga. The call came in around 2:49 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-2818",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Collegedale PD",
+      "event": "Assault",
+      "area": "Collegedale",
+      "created_at": "2026-10-13T14:33:59",
+      "location": "9400 block of Apison Pike",
+      "lat": 35.045,
+      "lng": -85.055,
+      "script": "A assault was reported at the 9400 block of Apison Pike in Collegedale. The call came in around 2:33 PM. Units are being assigned.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-1282",
+      "type": "Fire",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Soddy-Daisy FD",
+      "event": "Structure Fire",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T14:22:59",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Soddy-Daisy Fire units are on the way to a reported structure fire at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 2:22 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9242",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Shoplifting",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:53:59",
+      "location": "7000 block of Lee Hwy",
+      "lat": 35.048,
+      "lng": -85.158,
+      "script": "Chattanooga Police units are on scene of a reported shoplifting at the 7000 block of Lee Highway in Chattanooga. The call came in around 1:53 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9703",
+      "type": "Fire",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Tri-Community FD",
+      "event": "Fire Alarm",
+      "area": "Collegedale",
+      "created_at": "2026-10-13T13:27:59",
+      "location": "9400 block of Apison Pike",
+      "lat": 35.045,
+      "lng": -85.055,
+      "script": "Tri-Community Fire units are on the way to a reported fire alarm at the 9400 block of Apison Pike in Collegedale. The call came in around 1:27 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-5162",
+      "type": "Law",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Hamilton County SO",
+      "event": "Disorder",
+      "area": "Hamilton County",
+      "created_at": "2026-10-13T13:23:59",
+      "location": "4500 block of Hixson Pike",
+      "lat": 35.115,
+      "lng": -85.256,
+      "script": "A disorder was reported at the 4500 block of Hixson Pike in Hamilton County. The call came in around 1:23 PM. Units are being assigned.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-2331",
+      "type": "Traffic",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Traffic Accident w/ Injuries",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:21:59",
+      "location": "2000 block of Gunbarrel Rd",
+      "lat": 35.042,
+      "lng": -85.156,
+      "script": "Heads up. Chattanooga Police units are on the way to a reported traffic accident with injuries at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 1:21 PM. Expect delays in the area.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7681",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Theft From Vehicle",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:17:59",
+      "location": "2000 block of Gunbarrel Rd",
+      "lat": 35.042,
+      "lng": -85.156,
+      "script": "Chattanooga Police units are on the way to a reported theft from vehicle at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 1:17 PM.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:56:59"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7011",
+      "type": "Road Closure",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Road Closure - Crash",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:11:59",
+      "location": "400 block of Market St",
+      "lat": 35.051,
+      "lng": -85.31,
+      "script": "Heads up. A road closure was reported at the 400 block of Market Street in Chattanooga. The call came in around 1:11 PM. Expect delays and use another route.",
+      "first_seen": "2026-10-13T16:56:59",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:56:59"
         }
       ],
       "cleared_at": null

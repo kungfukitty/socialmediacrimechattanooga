@@ -46,7 +46,21 @@ USER_AGENT = os.environ.get(
 KEEP_HOURS = 12          # drop cleared calls after this long
 MAX_ITEMS = 60           # cap the feed size
 
-STATUS_LABELS = {"R": "Reported", "E": "Enroute", "OS": "On Scene", "T": "Transporting", "H": "At Hospital"}
+STATUS_LABELS = {
+    "Q": "Queued", "R": "Reported", "D": "Dispatched", "E": "Enroute", "OS": "On Scene",
+    "T": "Transporting", "H": "At Hospital",
+}
+
+# Crashes and road hazards are shown under Roads (type "Traffic"), whichever agency handles them.
+TRAFFIC_EVENT = re.compile(
+    r"\bmvc\b|\bmva\b|crash|wreck|accident|collision|hit\s+and\s+run|disabled\s+vehicle|"
+    r"stalled|debris|traffic\s+hazard|lane\s+block|road\s+block|vehicle\s+in\s+roadway",
+    re.I,
+)
+EVENT_SPOKEN = [  # county shorthand -> words for the voiceover (screen keeps the county wording)
+    (r"\bmvc\b", "motor vehicle crash"), (r"\bmva\b", "motor vehicle accident"),
+    (r"\bw/\s*", "with "), (r"\s*\bno injur(y|ies)\b", " with no injuries"), (r"\s+-\s+", ", "),
+]
 
 # ---------------------------------------------------------------- content rules
 # See docs/CONTENT_POLICY.md. Calls are posted with full details unless the topic would cause
@@ -89,6 +103,17 @@ def classify(inc: dict) -> str | None:
     if POLICE_SENSITIVE_EVENT.search(inc["event"]):
         return POLICE
     return None
+
+
+def categorize(inc: dict) -> dict:
+    """Apply Code Red redaction, otherwise move crashes and road hazards under Roads."""
+    traffic = inc.pop("_traffic", False)
+    label = classify(inc)
+    if label:
+        return redact(inc, label)
+    if traffic and inc["type"] != "Road Closure":
+        inc["type"] = "Traffic"
+    return inc
 
 
 def redact(inc: dict, label: str) -> dict:
@@ -195,6 +220,7 @@ def normalize(row: dict) -> dict | None:
         "event": _col(row, "Event"),
         "location_raw": _col(row, "Location"),
         "area": _col(row, "Area").title(),
+        "_traffic": bool(TRAFFIC_EVENT.search(_col(row, "Event"))),
         "created_at": parse_time(_col(row, "Time Created")),
         "_point": (row["_lat"], row["_lng"]) if "_lat" in row else None,
     }
@@ -304,6 +330,8 @@ def voiceover(inc: dict) -> str:
     """Fact-only script: every phrase comes from a field on the 911 list."""
     agency = _agency_spoken(inc["agency"]) or "Emergency crews"
     event = inc["event"].lower()
+    for pat, words in EVENT_SPOKEN:
+        event = re.sub(pat, words, event, flags=re.I)
     loc = speakable(inc["location"]).replace(" & ", " and ")
     where = f"the {loc}" if " block of " in loc else loc
     at = f" at {where}" if loc else ""
@@ -314,6 +342,11 @@ def voiceover(inc: dict) -> str:
         return f"Code red. {inc['event']}{at}{area}.{when}"
     if inc["type"] == "Road Closure":
         return f"Heads up. A road closure was reported{at}{area}.{when} Expect delays and use another route."
+    if inc["type"] == "Traffic":
+        if inc["status"] in ("E", "OS"):
+            verb = "are on scene of" if inc["status"] == "OS" else "are on the way to"
+            return f"Heads up. {agency} units {verb} a reported {event}{at}{area}.{when} Expect delays in the area."
+        return f"Heads up. A {event} was reported{at}{area}.{when} Expect delays in the area."
     if inc["status"] == "OS":
         return f"{agency} units are on scene of a reported {event}{at}{area}.{when}"
     if inc["status"] == "E":
@@ -398,10 +431,7 @@ def poll_once(out: Path, fixture: Path | None = None) -> int:
         inc = normalize(row)
         if not inc:
             continue
-        label = classify(inc)
-        if label:
-            redact(inc, label)
-        fresh.append(enrich(inc, cache))
+        fresh.append(enrich(categorize(inc), cache))
     GEOCACHE.write_text(json.dumps(cache, indent=1))
     existing = [i for i in read_feed(out) if not str(i.get("id", "")).startswith("SIM-")]  # drop demo data
     merged = merge(existing, fresh, datetime.now())
@@ -432,7 +462,7 @@ SIM_EVENTS = [
     ("Law", "Burglary"), ("Law", "Theft From Vehicle"), ("Law", "Suspicious Person"),
     ("Law", "Shots Fired Call"), ("Law", "Shoplifting"), ("Law", "Disorder"), ("Law", "Stolen Vehicle"),
     ("Fire", "Structure Fire"), ("Fire", "Vehicle Fire"), ("Fire", "Fire Alarm"), ("Fire", "Brush Fire"),
-    ("Road Closure", "Road Closure - Crash"), ("Road Closure", "Lane Blocked - Debris"),
+    ("Road Closure", "Road Closure - Crash"), ("Law", "MVC No Injuries"), ("Law", "MVC With Injuries"),
     ("EMS", "Medical Call"), ("Law", "Domestic Disturbance"),  # become Code Red
     ("Law", "Robbery"), ("Law", "Assault"), ("Law", "Traffic Accident w/ Injuries"),
 ]
@@ -458,9 +488,7 @@ def simulate(out: Path, n: int) -> None:
             "Time Created": created.strftime("%m/%d/%Y %H:%M:%S"),
             "Agency": fire if typ == "Fire" else police, "Event": event, "Location": raw, "Area": area,
         })
-        label = classify(inc)
-        if label:
-            redact(inc, label)
+        categorize(inc)
         inc.pop("_point", None)
         display, _ = block_of(inc.pop("location_raw"))
         inc.update(location=display, lat=lat, lng=lng)
