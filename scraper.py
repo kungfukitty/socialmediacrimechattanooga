@@ -5,7 +5,7 @@ scraper.py: polling adapter for the Hamilton County 9-1-1 Active Incidents list.
 Every POLL interval it:
   1. loads the public Active Incidents page (Playwright, because the rows load via JavaScript)
   2. parses the incident table
-  3. drops calls we never publish (EMS/medical, domestic, juvenile, mental health, ...)
+  3. turns sensitive calls into CODE RED alerts (location and time only, see content rules)
   4. trims locations to the street block ("1234 BOYNTON DR" -> "1200 block of Boynton Dr")
   5. geocodes the block (US Census geocoder, then OpenStreetMap Nominatim) with a local cache
   6. writes a fact-only voiceover script for each call
@@ -49,41 +49,51 @@ MAX_ITEMS = 60           # cap the feed size
 STATUS_LABELS = {"R": "Reported", "E": "Enroute", "OS": "On Scene", "T": "Transporting", "H": "At Hospital"}
 
 # ---------------------------------------------------------------- content rules
-# See docs/CONTENT_POLICY.md. Every call lands in one of three buckets:
-#   "drop"     never published (suicide, self-harm, mental-health crisis calls)
-#   "code_red" published as CODE RED: map pin, block location and time only. The call type,
-#              event, agency and status are removed before anything is written to disk.
-#   "normal"   published with full details
-DROP_EVENT = re.compile(r"suicid|self.?harm|mental|crisis|10-96|psych", re.I)
+# See docs/CONTENT_POLICY.md. Calls are posted with full details unless the topic would cause
+# trouble on TikTok or YouTube, or would expose a private person's health or abuse situation.
+# Those become CODE RED: map pin, street block, area and time, plus a neutral label.
+# Everything else about the call (event, agency, status, incident number) is removed before saving.
+#
+#   "Medical Response"  medical, overdose, suicide/self-harm and mental-health calls
+#                        (YouTube: drugs, suicide and self-harm are sensitive topics; TikTok: behavioral health
+#                        content can lose For You reach; and these are private health matters)
+#   "Police Response"   domestic, sexual, child-related and death calls
+#                        (YouTube limits ads on child abuse; both platforms treat sexual and domestic abuse
+#                        as sensitive; these calls can identify victims)
+#
+# Shootings, assaults, robberies, burglaries, thefts, fires and wrecks keep full details: both platforms
+# allow non-graphic news reporting of crime.
+CODE_RED = "Code Red"
+MEDICAL = "Medical Response"
+POLICE = "Police Response"
 
-CODE_RED_TYPES = {"EMS"}
-CODE_RED_STATUSES = {"T", "H"}  # Transporting / At Hospital: a patient is involved
-CODE_RED_EVENT = re.compile(
-    # medical
-    r"medical|overdose|\bod\b|cardiac|breath|unconscious|seizure|stroke|death|\bdoa\b|deceased|"
-    r"sick|injur|fall|lift\s+assist|\bems\b|ambulance|welfare|"
-    # domestic, sexual and child-related
-    r"domestic|\bdv\b|sex|rape|juvenile|child|\bcps\b|runaway|missing|"
-    # violent crime
-    r"shoot|shot|gun|weapon|armed|stab|cut(ting)?\b|assault|robbery|homicide|murder|kidnap|"
-    r"abduct|carjack|hostage|fight|violent|threat|person\s+down",
+MEDICAL_EVENT = re.compile(
+    r"medical|overdose|\bod\b|cardiac|heart|breath|unconscious|unresponsive|seizure|stroke|diabet|"
+    r"sick|fall\b|lift\s+assist|\bems\b|ambulance|bleed|"
+    r"suicid|self.?harm|mental|crisis|10-96|psych|behavior",
+    re.I,
+)
+POLICE_SENSITIVE_EVENT = re.compile(
+    r"domestic|\bdv\b|family\s+(dispute|disturbance|violence)|protective\s+order|"
+    r"sex|rape|molest|indecent|\bindec|stalk|"
+    r"juvenile|\bjuv\b|child|minor|\bcps\b|runaway|missing|amber|abuse|neglect|"
+    r"death|\bdoa\b|deceased|\bbody\b|welfare",
     re.I,
 )
 
-CODE_RED = "Code Red"
+
+def classify(inc: dict) -> str | None:
+    """Return the Code Red label for a call, or None if it is posted with full details."""
+    if inc["type"] == "EMS" or MEDICAL_EVENT.search(inc["event"]):
+        return MEDICAL
+    if POLICE_SENSITIVE_EVENT.search(inc["event"]):
+        return POLICE
+    return None
 
 
-def classify(inc: dict) -> str:
-    if DROP_EVENT.search(inc["event"]):
-        return "drop"
-    if inc["type"] in CODE_RED_TYPES or inc["status"] in CODE_RED_STATUSES or CODE_RED_EVENT.search(inc["event"]):
-        return "code_red"
-    return "normal"
-
-
-def redact(inc: dict) -> dict:
-    """Strip every detail about the call. Only the id, location, area and time survive."""
-    inc.update(type=CODE_RED, event=CODE_RED, agency="", status="CR", status_label="")
+def redact(inc: dict, label: str) -> dict:
+    """Strip every detail about the call. Only the id, location, area, time and label survive."""
+    inc.update(type=CODE_RED, event=label, agency="", status="CR", status_label="")
     return inc
 
 
@@ -301,7 +311,7 @@ def voiceover(inc: dict) -> str:
     t = _clock(inc["created_at"])
     when = f" The call came in around {t}." if t else ""
     if inc["type"] == CODE_RED:
-        return f"Code red. Emergency response{at}{area}.{when}"
+        return f"Code red. {inc['event']}{at}{area}.{when}"
     if inc["type"] == "Road Closure":
         return f"Heads up. A road closure was reported{at}{area}.{when} Expect delays and use another route."
     if inc["status"] == "OS":
@@ -388,11 +398,9 @@ def poll_once(out: Path, fixture: Path | None = None) -> int:
         inc = normalize(row)
         if not inc:
             continue
-        bucket = classify(inc)
-        if bucket == "drop":
-            continue
-        if bucket == "code_red":
-            redact(inc)
+        label = classify(inc)
+        if label:
+            redact(inc, label)
         fresh.append(enrich(inc, cache))
     GEOCACHE.write_text(json.dumps(cache, indent=1))
     existing = [i for i in read_feed(out) if not str(i.get("id", "")).startswith("SIM-")]  # drop demo data
@@ -425,7 +433,8 @@ SIM_EVENTS = [
     ("Law", "Shots Fired Call"), ("Law", "Shoplifting"), ("Law", "Disorder"), ("Law", "Stolen Vehicle"),
     ("Fire", "Structure Fire"), ("Fire", "Vehicle Fire"), ("Fire", "Fire Alarm"), ("Fire", "Brush Fire"),
     ("Road Closure", "Road Closure - Crash"), ("Road Closure", "Lane Blocked - Debris"),
-    ("EMS", "Medical Call"), ("Law", "Domestic Disturbance"), ("Law", "Assault"),  # become Code Red
+    ("EMS", "Medical Call"), ("Law", "Domestic Disturbance"),  # become Code Red
+    ("Law", "Robbery"), ("Law", "Assault"), ("Law", "Traffic Accident w/ Injuries"),
 ]
 SIM_AGENCY = {
     "Chattanooga": ("Chattanooga PD", "Chattanooga FD"), "Red Bank": ("Red Bank PD", "Red Bank FD"),
@@ -449,10 +458,9 @@ def simulate(out: Path, n: int) -> None:
             "Time Created": created.strftime("%m/%d/%Y %H:%M:%S"),
             "Agency": fire if typ == "Fire" else police, "Event": event, "Location": raw, "Area": area,
         })
-        if classify(inc) == "drop":
-            continue
-        if classify(inc) == "code_red":
-            redact(inc)
+        label = classify(inc)
+        if label:
+            redact(inc, label)
         inc.pop("_point", None)
         display, _ = block_of(inc.pop("location_raw"))
         inc.update(location=display, lat=lat, lng=lng)

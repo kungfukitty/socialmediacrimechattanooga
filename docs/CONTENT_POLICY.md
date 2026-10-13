@@ -22,11 +22,22 @@ Check every video against these rules before you post it.
 
 ## 2. Code Red calls
 
-These calls are published as **CODE RED**: a red map pin, the street block, the area and the dispatch time. **Nothing else.** No call type, event, agency, status, incident number or commentary, on screen, in the voiceover, or in the caption. The scraper removes those fields before saving.
+Every call on the county list is posted. Most get full details. A call becomes **CODE RED** only when its topic would cause trouble on TikTok or YouTube, or would expose a private person's health or abuse situation.
 
-- **Medical and EMS:** type `EMS`, status Transporting or At Hospital, or events naming medical conditions, overdoses, injuries or deaths
-- **Domestic, sexual and child-related:** domestic, DV, sex, rape, juvenile, child, CPS, runaway, missing person
-- **Violent crime:** shootings and shots fired, stabbings, assaults, robbery, homicide, kidnapping, carjacking, weapons, fights, threats
+A Code Red shows a red map pin, the street block, the area, the dispatch time and one neutral label. **Nothing else.** No event, agency, status, incident number or commentary, on screen, in the voiceover or in the caption. The scraper removes those fields before saving.
+
+| Label | Calls | Platform reason |
+|---|---|---|
+| **Medical Response** | All EMS calls; medical conditions, overdoses, falls, sick persons; suicide, self-harm and mental-health calls | YouTube treats drugs, suicide and self-harm as sensitive topics. TikTok can pull behavioral-health content from the For You feed. These are also private health matters. |
+| **Police Response** | Domestic and family violence, protective orders; sexual offenses and indecent exposure; child-related calls (juvenile, child, CPS, runaway, missing persons); death investigations; welfare checks | YouTube limits ads when child abuse is the main topic. Both platforms treat sexual and domestic abuse as sensitive. These calls can identify victims. |
+
+**Posted with full details:** burglary, theft, shoplifting, stolen vehicles, vandalism, robbery, shots fired and shootings, stabbings, assaults, fights, homicides, kidnappings, weapons calls, fires, alarms, wrecks (including injury wrecks), road closures, disorders and suspicious persons. Both platforms allow non-graphic news reporting of crime; YouTube lists "reports of nearby homicide events without graphic descriptions" as eligible for full ads.
+
+What keeps violent-crime posts safe:
+
+- **Facts from the 911 list only.** No descriptions of injuries, blood or weapons beyond the event name.
+- **No graphic footage or images.** Map and text only.
+- **"Reported" or "dispatched" wording.** TikTok can limit reach on unverified information about an unfolding emergency, so every post says where the information comes from.
 
 Don't guess or hint at what a Code Red was, even in comments. If a viewer asks, reply: "We only share the location for these calls."
 
@@ -34,10 +45,10 @@ Don't guess or hint at what a Code Red was, even in comments. If a viewer asks, 
 
 | Rule | Why |
 |---|---|
-| **No suicide, self-harm or mental-health crisis calls** (suicid*, self harm, mental, crisis, psych, 10-96). These are dropped entirely, not shown as Code Red. | Contagion risk; platform rules |
-| **No names, faces, license plates or house numbers** of victims, suspects or bystanders | Privacy and defamation risk |
-| **No exact addresses.** Show the street block only ("1200 block of Boynton Dr"). Map pins snap to the block, not the parcel. | Locations of homes |
+| **No names, faces, license plates or house numbers** of victims, suspects or bystanders | Privacy and defamation risk; TikTok treats private home addresses as personal information |
+| **No exact addresses.** Show the street block only ("1200 block of Boynton Dr"). Map pins snap to about 100 m. | Locations of homes |
 | **No speculation** about cause, motive, suspects, injuries or outcome | Defamation and accuracy |
+| **No graphic descriptions** of injuries, deaths or violence | YouTube removes ads from graphic accounts of shootings and tragedies |
 | **No incidents at schools, shelters, hospitals or places of worship** unless an agency has issued a public statement | Sensitive locations |
 | **No Breaking Clips on calls still marked `R` (Reported).** Wait until units are Enroute or On Scene. | Many reported calls turn out to be nothing |
 | **No scanner audio** until a legal review is done | Federal and state law limits; Broadcastify terms |
