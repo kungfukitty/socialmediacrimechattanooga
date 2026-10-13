@@ -114,6 +114,11 @@ def _clean(s: str | None) -> str:
     return re.sub(r"\s+", " ", s or "").strip()
 
 
+# Hamilton County sits around 35.0 N, -85.2 W
+COORDS = re.compile(r"\b(3[45]\.\d{3,})[^\d]{1,40}?(-8[45]\.\d{3,})")
+COORDS_REV = re.compile(r"(-8[45]\.\d{3,})[^\d]{1,40}?\b(3[45]\.\d{3,})")
+
+
 def parse_rows(html: str) -> list[dict]:
     """Return one dict per table row, keyed by the header text."""
     soup = BeautifulSoup(html, "html.parser")
@@ -121,13 +126,23 @@ def parse_rows(html: str) -> list[dict]:
         headers = [_clean(th.get_text()) for th in table.find_all("th")]
         if not any(h.lower().startswith("master incident") for h in headers):
             continue
-        for junk in table.find_all(["button", "script", "style"]):
-            junk.decompose()  # the "locate on map" buttons carry text like "Map"
+        for junk in table.find_all(["script", "style"]):
+            junk.decompose()
         rows = []
         for tr in table.find_all("tr"):
+            # The location is the text of the "locate on map" button, so button text is kept.
             cells = [_clean(td.get_text(" ")) for td in tr.find_all("td")]
             if len(cells) >= len(headers) - 1 and any(cells):
-                rows.append(dict(zip(headers, cells)))
+                row = dict(zip(headers, cells))
+                # The map buttons may carry coordinates in their attributes; use them if present.
+                m = COORDS.search(str(tr))
+                if m:
+                    row["_lat"], row["_lng"] = float(m.group(1)), float(m.group(2))
+                else:
+                    m = COORDS_REV.search(str(tr))
+                    if m:
+                        row["_lat"], row["_lng"] = float(m.group(2)), float(m.group(1))
+                rows.append(row)
         return rows
     return []
 
@@ -154,7 +169,7 @@ def parse_time(raw: str) -> str | None:
 
 
 def normalize(row: dict) -> dict | None:
-    iid = _col(row, "Master Incident")
+    iid = re.sub(r"^\s*(master\s+)?incident\s*#?\s*", "", _col(row, "Master Incident"), flags=re.I)
     if not iid:
         return None
     status_raw = _col(row, "Status").upper()
@@ -169,8 +184,9 @@ def normalize(row: dict) -> dict | None:
         "agency": _col(row, "Agency"),
         "event": _col(row, "Event"),
         "location_raw": _col(row, "Location"),
-        "area": _col(row, "Area"),
+        "area": _col(row, "Area").title(),
         "created_at": parse_time(_col(row, "Time Created")),
+        "_point": (row["_lat"], row["_lng"]) if "_lat" in row else None,
     }
 
 
@@ -183,18 +199,25 @@ ABBREV = {
 }
 
 
+def _title(s: str) -> str:
+    """Title-case a street name but keep ordinals lowercase: 23rd, not 23Rd."""
+    return re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), s.title())
+
+
 def block_of(location: str) -> tuple[str, str]:
     """Return (display, geocode_query). Exact house numbers are rounded down to the block."""
     loc = _clean(location).upper()
     loc = re.sub(r"\s*\(.*?\)\s*", " ", loc).strip()  # drop "(BUTTON)" text etc.
+    loc = re.sub(r"\b(LOCATE( ON MAP)?|VIEW MAP|MAP)\b", " ", loc)
+    loc = re.sub(r"\s+", " ", loc).strip()
     m = re.match(r"^(\d+)\s+(?:BLOCK\s+(?:OF\s+)?)?(.+)$", loc)
     if m:
         n = int(m.group(1))
         block = (n // 100) * 100
-        street = m.group(2).title()
+        street = _title(m.group(2))
         return f"{block} block of {street}", f"{max(block, 1) + 50} {m.group(2)}"
     # Intersections ("MARKET ST / MAIN ST") and named places stay as-is.
-    return loc.title().replace(" / ", " & "), loc.replace(" / ", " & ")
+    return _title(loc).replace(" / ", " & "), loc.replace(" / ", " & ")
 
 
 def speakable(text: str) -> str:
@@ -273,25 +296,30 @@ def voiceover(inc: dict) -> str:
     event = inc["event"].lower()
     loc = speakable(inc["location"]).replace(" & ", " and ")
     where = f"the {loc}" if " block of " in loc else loc
+    at = f" at {where}" if loc else ""
     area = f" in {inc['area']}" if inc["area"] and inc["area"] != "Hamilton County" else " in Hamilton County"
     t = _clock(inc["created_at"])
     when = f" The call came in around {t}." if t else ""
     if inc["type"] == CODE_RED:
-        return f"Code red. Emergency response at {where}{area}.{when}"
+        return f"Code red. Emergency response{at}{area}.{when}"
     if inc["type"] == "Road Closure":
-        return f"Heads up. A road closure was reported at {where}{area}.{when} Expect delays and use another route."
+        return f"Heads up. A road closure was reported{at}{area}.{when} Expect delays and use another route."
     if inc["status"] == "OS":
-        return f"{agency} units are on scene of a reported {event} at {where}{area}.{when}"
+        return f"{agency} units are on scene of a reported {event}{at}{area}.{when}"
     if inc["status"] == "E":
-        return f"{agency} units are on the way to a reported {event} at {where}{area}.{when}"
-    return f"A {event} was reported at {where}{area}.{when} Units are being assigned."
+        return f"{agency} units are on the way to a reported {event}{at}{area}.{when}"
+    return f"A {event} was reported{at}{area}.{when} Units are being assigned."
 
 
 # ---------------------------------------------------------------- merge + write
 def enrich(inc: dict, cache: dict) -> dict:
     display, query = block_of(inc.pop("location_raw"))
     inc["location"] = display
-    point = geocode(query, inc["area"], cache)
+    page_point = inc.pop("_point", None)
+    if page_point:  # coordinates from the 911 page itself, rounded to about 100 m
+        point = (round(page_point[0], 3), round(page_point[1], 3))
+    else:
+        point = geocode(query, inc["area"], cache) if query else None
     inc["lat"], inc["lng"] = point if point else (None, None)
     inc["script"] = voiceover(inc)
     return inc
@@ -348,7 +376,9 @@ def read_feed(path: Path) -> list[dict]:
 
 
 def poll_once(out: Path, fixture: Path | None = None) -> int:
-    html = fixture.read_text() if fixture else fetch_html()
+    html = fixture.read_text(encoding="utf-8") if fixture else fetch_html()
+    if not fixture:  # keep the last page for debugging (python scraper.py --fixture last_page.html)
+        (HERE / "last_page.html").write_text(html, encoding="utf-8")
     rows = parse_rows(html)
     if not rows:
         print("WARNING: no rows parsed (quiet period, blocked, or the page layout changed)", file=sys.stderr)
@@ -423,6 +453,7 @@ def simulate(out: Path, n: int) -> None:
             continue
         if classify(inc) == "code_red":
             redact(inc)
+        inc.pop("_point", None)
         display, _ = block_of(inc.pop("location_raw"))
         inc.update(location=display, lat=lat, lng=lng)
         inc["script"] = voiceover(inc)

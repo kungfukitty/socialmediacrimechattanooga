@@ -1,401 +1,401 @@
 {
-  "generated_at": "2026-10-13T16:27:37",
+  "generated_at": "2026-10-13T16:39:48",
   "source": "https://www.hamiltontn911.gov/active-incidents.php",
   "simulated": true,
   "disclaimer": "Based on public 9-1-1 dispatch data. Not an official statement. Details may change.",
   "incidents": [
     {
-      "id": "SIM-261013-8678",
-      "type": "Road Closure",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Chattanooga PD",
-      "event": "Lane Blocked - Debris",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T16:05:37",
-      "location": "1200 block of Boynton Dr",
-      "lat": 35.072,
-      "lng": -85.301,
-      "script": "Heads up. A road closure was reported at the 1200 block of Boynton Drive in Chattanooga. The call came in around 4:05 PM. Expect delays and use another route.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "E",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-6594",
-      "type": "Road Closure",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Signal Mountain PD",
-      "event": "Road Closure - Crash",
-      "area": "Signal Mountain",
-      "created_at": "2026-10-13T15:57:37",
-      "location": "1200 block of Taft Hwy",
-      "lat": 35.122,
-      "lng": -85.343,
-      "script": "Heads up. A road closure was reported at the 1200 block of Taft Highway in Signal Mountain. The call came in around 3:57 PM. Expect delays and use another route.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-3878",
+      "id": "SIM-261013-8170",
       "type": "Code Red",
       "status": "CR",
       "status_label": "",
       "agency": "",
       "event": "Code Red",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T15:42:37",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Code red. Emergency response at the 2100 block of East Main Street in Chattanooga. The call came in around 3:42 PM.",
-      "first_seen": "2026-10-13T16:27:37",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T16:13:48",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Code red. Emergency response at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 4:13 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "CR",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-1745",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Suspicious Person",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T15:36:37",
-      "location": "3000 block of Broad St",
-      "lat": 35.028,
-      "lng": -85.317,
-      "script": "Chattanooga Police units are on scene of a reported suspicious person at the 3000 block of Broad Street in Chattanooga. The call came in around 3:36 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-4784",
-      "type": "Road Closure",
+      "id": "SIM-261013-8647",
+      "type": "Fire",
       "status": "E",
       "status_label": "Enroute",
-      "agency": "East Ridge PD",
-      "event": "Lane Blocked - Debris",
-      "area": "East Ridge",
-      "created_at": "2026-10-13T15:34:37",
-      "location": "3700 block of Ringgold Rd",
-      "lat": 35.001,
-      "lng": -85.239,
-      "script": "Heads up. A road closure was reported at the 3700 block of Ringgold Road in East Ridge. The call came in around 3:34 PM. Expect delays and use another route.",
-      "first_seen": "2026-10-13T16:27:37",
+      "agency": "Chattanooga FD",
+      "event": "Brush Fire",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T16:07:48",
+      "location": "7000 block of Lee Hwy",
+      "lat": 35.048,
+      "lng": -85.158,
+      "script": "Chattanooga Fire units are on the way to a reported brush fire at the 7000 block of Lee Highway in Chattanooga. The call came in around 4:07 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "E",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-7735",
+      "id": "SIM-261013-6613",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Soddy-Daisy PD",
+      "event": "Burglary",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T16:07:48",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Soddy-Daisy Police units are on the way to a reported burglary at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 4:07 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7043",
       "type": "Code Red",
       "status": "CR",
       "status_label": "",
       "agency": "",
       "event": "Code Red",
-      "area": "Hamilton County",
-      "created_at": "2026-10-13T15:22:37",
-      "location": "4500 block of Hixson Pike",
-      "lat": 35.115,
-      "lng": -85.256,
-      "script": "Code red. Emergency response at the 4500 block of Hixson Pike in Hamilton County. The call came in around 3:22 PM.",
-      "first_seen": "2026-10-13T16:27:37",
+      "area": "Red Bank",
+      "created_at": "2026-10-13T15:53:48",
+      "location": "1800 block of Dayton Blvd",
+      "lat": 35.087,
+      "lng": -85.296,
+      "script": "Code red. Emergency response at the 1800 block of Dayton Boulevard in Red Bank. The call came in around 3:53 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "CR",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-4118",
+      "id": "SIM-261013-4685",
       "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Burglary",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:52:48",
+      "location": "1400 block of Mccallie Ave",
+      "lat": 35.043,
+      "lng": -85.279,
+      "script": "Chattanooga Police units are on scene of a reported burglary at the 1400 block of Mccallie Avenue in Chattanooga. The call came in around 3:52 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-5794",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
       "agency": "Chattanooga PD",
       "event": "Stolen Vehicle",
       "area": "Chattanooga",
-      "created_at": "2026-10-13T15:21:37",
-      "location": "400 block of Market St",
-      "lat": 35.051,
-      "lng": -85.31,
-      "script": "Chattanooga Police units are on the way to a reported stolen vehicle at the 400 block of Market Street in Chattanooga. The call came in around 3:21 PM.",
-      "first_seen": "2026-10-13T16:27:37",
+      "created_at": "2026-10-13T15:43:48",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Police units are on scene of a reported stolen vehicle at the 3000 block of Broad Street in Chattanooga. The call came in around 3:43 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
-          "status": "E",
-          "at": "2026-10-13T16:27:37"
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-8396",
+      "id": "SIM-261013-6219",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga PD",
+      "event": "Theft From Vehicle",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:39:48",
+      "location": "1200 block of Boynton Dr",
+      "lat": 35.072,
+      "lng": -85.301,
+      "script": "Chattanooga Police units are on scene of a reported theft from vehicle at the 1200 block of Boynton Drive in Chattanooga. The call came in around 3:39 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-4486",
+      "type": "Road Closure",
+      "status": "R",
+      "status_label": "Reported",
+      "agency": "Chattanooga PD",
+      "event": "Lane Blocked - Debris",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T15:29:48",
+      "location": "2000 block of Gunbarrel Rd",
+      "lat": 35.042,
+      "lng": -85.156,
+      "script": "Heads up. A road closure was reported at the 2000 block of Gunbarrel Road in Chattanooga. The call came in around 3:29 PM. Expect delays and use another route.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "R",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3495",
+      "type": "Code Red",
+      "status": "CR",
+      "status_label": "",
+      "agency": "",
+      "event": "Code Red",
+      "area": "Collegedale",
+      "created_at": "2026-10-13T15:17:48",
+      "location": "9400 block of Apison Pike",
+      "lat": 35.045,
+      "lng": -85.055,
+      "script": "Code red. Emergency response at the 9400 block of Apison Pike in Collegedale. The call came in around 3:17 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "CR",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-7866",
       "type": "Law",
       "status": "R",
       "status_label": "Reported",
       "agency": "Chattanooga PD",
-      "event": "Theft From Vehicle",
+      "event": "Shoplifting",
       "area": "Chattanooga",
-      "created_at": "2026-10-13T15:10:37",
-      "location": "400 block of Market St",
-      "lat": 35.051,
-      "lng": -85.31,
-      "script": "A theft from vehicle was reported at the 400 block of Market Street in Chattanooga. The call came in around 3:10 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:27:37",
+      "created_at": "2026-10-13T15:12:48",
+      "location": "1200 block of Boynton Dr",
+      "lat": 35.072,
+      "lng": -85.301,
+      "script": "A shoplifting was reported at the 1200 block of Boynton Drive in Chattanooga. The call came in around 3:12 PM. Units are being assigned.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "R",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-9271",
-      "type": "Law",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Soddy-Daisy PD",
-      "event": "Suspicious Person",
-      "area": "Soddy-Daisy",
-      "created_at": "2026-10-13T14:57:37",
-      "location": "11000 block of Dayton Pike",
-      "lat": 35.235,
-      "lng": -85.19,
-      "script": "Soddy-Daisy Police units are on scene of a reported suspicious person at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 2:57 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-2404",
-      "type": "Code Red",
-      "status": "CR",
-      "status_label": "",
-      "agency": "",
-      "event": "Code Red",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T14:32:37",
-      "location": "2100 block of E Main St",
-      "lat": 35.031,
-      "lng": -85.283,
-      "script": "Code red. Emergency response at the 2100 block of East Main Street in Chattanooga. The call came in around 2:32 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "CR",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-1947",
-      "type": "Code Red",
-      "status": "CR",
-      "status_label": "",
-      "agency": "",
-      "event": "Code Red",
+      "id": "SIM-261013-9759",
+      "type": "Fire",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "East Ridge FD",
+      "event": "Brush Fire",
       "area": "East Ridge",
-      "created_at": "2026-10-13T14:20:37",
+      "created_at": "2026-10-13T15:02:48",
       "location": "3700 block of Ringgold Rd",
       "lat": 35.001,
       "lng": -85.239,
-      "script": "Code red. Emergency response at the 3700 block of Ringgold Road in East Ridge. The call came in around 2:20 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "CR",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-6335",
-      "type": "Fire",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Soddy-Daisy FD",
-      "event": "Structure Fire",
-      "area": "Soddy-Daisy",
-      "created_at": "2026-10-13T14:02:37",
-      "location": "11000 block of Dayton Pike",
-      "lat": 35.235,
-      "lng": -85.19,
-      "script": "Soddy-Daisy Fire units are on scene of a reported structure fire at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 2:02 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-9139",
-      "type": "Law",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Hamilton County SO",
-      "event": "Theft From Vehicle",
-      "area": "Hamilton County",
-      "created_at": "2026-10-13T13:18:37",
-      "location": "4500 block of Hixson Pike",
-      "lat": 35.115,
-      "lng": -85.256,
-      "script": "A theft from vehicle was reported at the 4500 block of Hixson Pike in Hamilton County. The call came in around 1:18 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "R",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-6299",
-      "type": "Law",
-      "status": "E",
-      "status_label": "Enroute",
-      "agency": "Hamilton County SO",
-      "event": "Shoplifting",
-      "area": "Hamilton County",
-      "created_at": "2026-10-13T13:09:37",
-      "location": "4500 block of Hixson Pike",
-      "lat": 35.115,
-      "lng": -85.256,
-      "script": "Hamilton County Sheriff's Office units are on the way to a reported shoplifting at the 4500 block of Hixson Pike in Hamilton County. The call came in around 1:09 PM.",
-      "first_seen": "2026-10-13T16:27:37",
+      "script": "East Ridge Fire units are on the way to a reported brush fire at the 3700 block of Ringgold Road in East Ridge. The call came in around 3:02 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "E",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-5917",
-      "type": "Law",
-      "status": "R",
-      "status_label": "Reported",
-      "agency": "Collegedale PD",
-      "event": "Shoplifting",
+      "id": "SIM-261013-3233",
+      "type": "Code Red",
+      "status": "CR",
+      "status_label": "",
+      "agency": "",
+      "event": "Code Red",
       "area": "Collegedale",
-      "created_at": "2026-10-13T13:05:37",
+      "created_at": "2026-10-13T14:49:48",
       "location": "9400 block of Apison Pike",
       "lat": 35.045,
       "lng": -85.055,
-      "script": "A shoplifting was reported at the 9400 block of Apison Pike in Collegedale. The call came in around 1:05 PM. Units are being assigned.",
-      "first_seen": "2026-10-13T16:27:37",
+      "script": "Code red. Emergency response at the 9400 block of Apison Pike in Collegedale. The call came in around 2:49 PM.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
-          "status": "R",
-          "at": "2026-10-13T16:27:37"
+          "status": "CR",
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null
     },
     {
-      "id": "SIM-261013-3943",
+      "id": "SIM-261013-5252",
+      "type": "Road Closure",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Chattanooga PD",
+      "event": "Lane Blocked - Debris",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T14:43:48",
+      "location": "7000 block of Lee Hwy",
+      "lat": 35.048,
+      "lng": -85.158,
+      "script": "Heads up. A road closure was reported at the 7000 block of Lee Highway in Chattanooga. The call came in around 2:43 PM. Expect delays and use another route.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-2103",
+      "type": "Law",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "East Ridge PD",
+      "event": "Disorder",
+      "area": "East Ridge",
+      "created_at": "2026-10-13T14:25:48",
+      "location": "3700 block of Ringgold Rd",
+      "lat": 35.001,
+      "lng": -85.239,
+      "script": "East Ridge Police units are on scene of a reported disorder at the 3700 block of Ringgold Road in East Ridge. The call came in around 2:25 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-5916",
+      "type": "Fire",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga FD",
+      "event": "Vehicle Fire",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:54:48",
+      "location": "3000 block of Broad St",
+      "lat": 35.028,
+      "lng": -85.317,
+      "script": "Chattanooga Fire units are on scene of a reported vehicle fire at the 3000 block of Broad Street in Chattanooga. The call came in around 1:54 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-9293",
+      "type": "Law",
+      "status": "E",
+      "status_label": "Enroute",
+      "agency": "Soddy-Daisy PD",
+      "event": "Theft From Vehicle",
+      "area": "Soddy-Daisy",
+      "created_at": "2026-10-13T13:48:48",
+      "location": "11000 block of Dayton Pike",
+      "lat": 35.235,
+      "lng": -85.19,
+      "script": "Soddy-Daisy Police units are on the way to a reported theft from vehicle at the 11000 block of Dayton Pike in Soddy-Daisy. The call came in around 1:48 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "E",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-5995",
+      "type": "Fire",
+      "status": "OS",
+      "status_label": "On Scene",
+      "agency": "Chattanooga FD",
+      "event": "Fire Alarm",
+      "area": "Chattanooga",
+      "created_at": "2026-10-13T13:31:48",
+      "location": "1200 block of Boynton Dr",
+      "lat": 35.072,
+      "lng": -85.301,
+      "script": "Chattanooga Fire units are on scene of a reported fire alarm at the 1200 block of Boynton Drive in Chattanooga. The call came in around 1:31 PM.",
+      "first_seen": "2026-10-13T16:39:48",
+      "history": [
+        {
+          "status": "OS",
+          "at": "2026-10-13T16:39:48"
+        }
+      ],
+      "cleared_at": null
+    },
+    {
+      "id": "SIM-261013-3006",
       "type": "Road Closure",
       "status": "E",
       "status_label": "Enroute",
       "agency": "Chattanooga PD",
       "event": "Road Closure - Crash",
       "area": "Chattanooga",
-      "created_at": "2026-10-13T12:48:37",
-      "location": "1200 block of Boynton Dr",
-      "lat": 35.072,
-      "lng": -85.301,
-      "script": "Heads up. A road closure was reported at the 1200 block of Boynton Drive in Chattanooga. The call came in around 12:48 PM. Expect delays and use another route.",
-      "first_seen": "2026-10-13T16:27:37",
+      "created_at": "2026-10-13T13:06:48",
+      "location": "2100 block of E Main St",
+      "lat": 35.031,
+      "lng": -85.283,
+      "script": "Heads up. A road closure was reported at the 2100 block of East Main Street in Chattanooga. The call came in around 1:06 PM. Expect delays and use another route.",
+      "first_seen": "2026-10-13T16:39:48",
       "history": [
         {
           "status": "E",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-5021",
-      "type": "Road Closure",
-      "status": "OS",
-      "status_label": "On Scene",
-      "agency": "Chattanooga PD",
-      "event": "Lane Blocked - Debris",
-      "area": "Chattanooga",
-      "created_at": "2026-10-13T12:41:37",
-      "location": "1200 block of Boynton Dr",
-      "lat": 35.072,
-      "lng": -85.301,
-      "script": "Heads up. A road closure was reported at the 1200 block of Boynton Drive in Chattanooga. The call came in around 12:41 PM. Expect delays and use another route.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "OS",
-          "at": "2026-10-13T16:27:37"
-        }
-      ],
-      "cleared_at": null
-    },
-    {
-      "id": "SIM-261013-2536",
-      "type": "Code Red",
-      "status": "CR",
-      "status_label": "",
-      "agency": "",
-      "event": "Code Red",
-      "area": "Signal Mountain",
-      "created_at": "2026-10-13T12:35:37",
-      "location": "1200 block of Taft Hwy",
-      "lat": 35.122,
-      "lng": -85.343,
-      "script": "Code red. Emergency response at the 1200 block of Taft Highway in Signal Mountain. The call came in around 12:35 PM.",
-      "first_seen": "2026-10-13T16:27:37",
-      "history": [
-        {
-          "status": "CR",
-          "at": "2026-10-13T16:27:37"
+          "at": "2026-10-13T16:39:48"
         }
       ],
       "cleared_at": null

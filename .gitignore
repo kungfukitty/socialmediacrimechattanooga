@@ -2,4 +2,5 @@
 *.mp4
 *.mov
 geocache.json
+last_page.html
 __pycache__/
